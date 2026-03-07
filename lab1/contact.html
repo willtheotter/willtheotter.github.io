@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will Walter | CST336 Lab 1</title>
+<title>Contact Will</title>
 
 <style>
 
 body{
-font-family:Segoe UI, sans-serif;
+font-family:Segoe UI;
 background:#f0f4f8;
 margin:0;
 display:flex;
 flex-direction:column;
 min-height:100vh;
-color:#0a1929;
 }
 
 nav{
@@ -33,10 +31,8 @@ nav a{
 color:white;
 text-decoration:none;
 font-weight:bold;
-font-size:18px;
 padding:8px 14px;
 border-radius:20px;
-transition:.2s;
 }
 
 nav a:hover{
@@ -50,32 +46,17 @@ border-bottom:4px solid #fedb5f;
 
 .container{
 flex:1;
-max-width:1000px;
+max-width:800px;
 margin:auto;
-padding:40px;
 background:white;
+padding:40px;
 border-radius:20px;
-box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
 
-.home-flex{
-display:flex;
-align-items:center;
-gap:40px;
-flex-wrap:wrap;
-}
-
-.home-flex img{
-width:220px;
-height:220px;
-border-radius:50%;
-border:5px solid #3083a8;
-object-fit:cover;
-}
-
-h1{
-border-left:6px solid #3083a8;
-padding-left:15px;
+iframe{
+width:100%;
+height:500px;
+border:none;
 }
 
 footer{
@@ -100,31 +81,17 @@ margin-right:10px;
 
 <nav>
 <ul>
-<li><a href="index.html" class="active">Home</a></li>
+<li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
-<li><a href="contact.html">Contact</a></li>
+<li><a href="contact.html" class="active">Contact</a></li>
 </ul>
 </nav>
 
 <div class="container">
 
-<h1>Hello I'm Will</h1>
+<h1>Contact Me</h1>
 
-<div class="home-flex">
-
-<img src="img/me.jpg" alt="Will Walter">
-
-<div>
-
-<p>Computer Science student at <b>CSUMB</b>.</p>
-
-<p>I enjoy web development, building apps, and playing basketball.</p>
-
-<p>This website was created for <b>CST336 Lab 1</b>.</p>
-
-</div>
-
-</div>
+<iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"></iframe>
 
 </div>
 

@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will Walter | CST336 Lab 1</title>
+<title>About Will</title>
 
 <style>
 
 body{
-font-family:Segoe UI, sans-serif;
+font-family:Segoe UI;
 background:#f0f4f8;
 margin:0;
 display:flex;
 flex-direction:column;
 min-height:100vh;
-color:#0a1929;
 }
 
 nav{
@@ -33,10 +31,8 @@ nav a{
 color:white;
 text-decoration:none;
 font-weight:bold;
-font-size:18px;
 padding:8px 14px;
 border-radius:20px;
-transition:.2s;
 }
 
 nav a:hover{
@@ -52,30 +48,30 @@ border-bottom:4px solid #fedb5f;
 flex:1;
 max-width:1000px;
 margin:auto;
-padding:40px;
 background:white;
+padding:40px;
 border-radius:20px;
-box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
 
-.home-flex{
-display:flex;
-align-items:center;
-gap:40px;
-flex-wrap:wrap;
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
 }
 
-.home-flex img{
-width:220px;
-height:220px;
-border-radius:50%;
-border:5px solid #3083a8;
-object-fit:cover;
+th,td{
+border:1px solid #ccc;
+padding:10px;
+text-align:center;
 }
 
-h1{
-border-left:6px solid #3083a8;
-padding-left:15px;
+th{
+background:#1e6b8f;
+color:white;
+}
+
+ul{
+margin-top:20px;
 }
 
 footer{
@@ -100,31 +96,53 @@ margin-right:10px;
 
 <nav>
 <ul>
-<li><a href="index.html" class="active">Home</a></li>
-<li><a href="about.html">About</a></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html" class="active">About</a></li>
 <li><a href="contact.html">Contact</a></li>
 </ul>
 </nav>
 
 <div class="container">
 
-<h1>Hello I'm Will</h1>
+<h1>About Me</h1>
 
-<div class="home-flex">
+<table>
 
-<img src="img/me.jpg" alt="Will Walter">
+<tr>
+<th>Language</th>
+<th>Experience</th>
+</tr>
 
-<div>
+<tr>
+<td>HTML / CSS</td>
+<td>Advanced</td>
+</tr>
 
-<p>Computer Science student at <b>CSUMB</b>.</p>
+<tr>
+<td>JavaScript</td>
+<td>Intermediate</td>
+</tr>
 
-<p>I enjoy web development, building apps, and playing basketball.</p>
+<tr>
+<td>Python</td>
+<td>Advanced</td>
+</tr>
 
-<p>This website was created for <b>CST336 Lab 1</b>.</p>
+<tr>
+<td>Java</td>
+<td>Intermediate</td>
+</tr>
 
-</div>
+</table>
 
-</div>
+<h2>Hobbies</h2>
+
+<ul>
+<li>Basketball</li>
+<li>Programming</li>
+<li>Building websites</li>
+<li>Exploring Monterey</li>
+</ul>
 
 </div>
 
