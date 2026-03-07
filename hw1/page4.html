@@ -23,6 +23,58 @@
             --gradient-web3: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
         }
 
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--gradient-future);
+            color: white;
+        }
+
         /* Hero section */
         .future-hero {
             background: var(--gradient-future);
@@ -155,8 +207,17 @@
         }
 
         .trend-features {
-            list-style: none;
             margin: 1rem 0;
+        }
+
+        .trend-features h4 {
+            margin-bottom: 0.5rem;
+            color: var(--future-dark);
+        }
+
+        .trend-features ul {
+            list-style: none;
+            margin: 0.5rem 0 1rem 0;
         }
 
         .trend-features li {
@@ -179,6 +240,11 @@
             padding: 3rem;
             margin: 3rem 0;
             color: white;
+        }
+
+        .future-timeline h2 {
+            color: white;
+            text-align: center;
         }
 
         .timeline-container {
@@ -261,6 +327,7 @@
             background: var(--gradient-future);
             border-radius: 5px;
             width: 0%;
+            transition: width 1s ease;
         }
 
         /* Figure with figcaption */
@@ -359,22 +426,63 @@
             color: #718096;
         }
 
+        /* Buttons */
+        .learn-more-btn {
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #1e272e;
+            color: #d2dae2;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-content img {
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .timeline-container {
                 grid-template-columns: 1fr;
             }
-            
             .future-hero h2 {
                 font-size: 1.8rem;
             }
-            
             .trends-grid {
                 grid-template-columns: 1fr;
             }
-            
             .predictions-grid {
                 grid-template-columns: 1fr;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
             }
         }
 
@@ -383,82 +491,300 @@
             from { width: 0; }
             to { width: var(--target-width); }
         }
-
+        
         .confidence-fill {
             animation: fillBar 1.5s ease forwards;
         }
     </style>
 </head>
 <body>
-
-<nav>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="page2.html">History</a></li>
-        <li><a href="page3.html">Popular Languages</a></li>
-        <li><a href="page4.html" class="active">Future Trends</a></li>
-    </ul>
-</nav>
-
-<main class="wrapper">
-    <h1><i class="fas fa-rocket"></i> Future Trends in Programming</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="page2.html">History</a></li>
+            <li><a href="page3.html">Popular Languages</a></li>
+            <li><a href="page4.html" class="active">Future Trends</a></li>
+        </ul>
+    </nav>
     
-    <!-- Hero Section -->
-    <section aria-label="Hero Section">
-        <h2>The Next Decade of Code</h2>
-        <p>Explore the emerging technologies, languages, and paradigms that will shape software development through 2035 and beyond.</p>
-    </section>
+    <main class="wrapper">
+        <h1><i class="fas fa-rocket"></i> Future Trends in Programming</h1>
 
-    <!-- Main Trends Grid -->
-    <section aria-label="Emerging Trends">
+        <!-- Hero Section -->
+        <div class="future-hero">
+            <h2>The Next Decade of Code</h2>
+            <p>Explore the emerging technologies, languages, and paradigms that will shape software development through 2035 and beyond.</p>
+        </div>
+
+        <!-- Main Trends Grid -->
         <h2><i class="fas fa-chart-line"></i> Emerging Trends</h2>
         <div class="trends-grid">
-            <!-- All trend cards here (unchanged) -->
-            <!-- ... existing trend cards ... -->
-        </div>
-    </section>
+            <!-- AI & Machine Learning -->
+            <div class="trend-card">
+                <div class="trend-icon"><i class="fas fa-brain"></i></div>
+                <h3>AI & Machine Learning</h3>
+                <span class="trend-badge badge-mainstream">Mainstream</span>
+                <div class="trend-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">+312%</div>
+                        <div class="stat-label">Job Growth</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$500B</div>
+                        <div class="stat-label">Market by 2030</div>
+                    </div>
+                </div>
+                <p class="trend-description">AI is becoming ubiquitous, from code generation to autonomous systems. Languages like Python, R, and Julia are evolving with specialized libraries for deep learning and neural networks.</p>
+                <div class="trend-features">
+                    <h4>Key Developments:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Automated code generation (GitHub Copilot, ChatGPT)</li>
+                        <li><i class="fas fa-check"></i> Specialized AI hardware integration</li>
+                        <li><i class="fas fa-check"></i> Edge AI and on-device learning</li>
+                        <li><i class="fas fa-check"></i> Explainable AI frameworks</li>
+                    </ul>
+                </div>
+                <p><strong>Leading Languages:</strong> Python, R, Julia, Mojo</p>
+            </div>
 
-    <!-- Future Timeline -->
-    <section aria-label="Technology Adoption Timeline">
-        <h2><i class="fas fa-calendar-alt"></i> Technology Adoption Timeline</h2>
-        <div class="timeline-container">
-            <!-- timeline nodes here (unchanged) -->
-        </div>
-    </section>
+            <!-- New Languages -->
+            <div class="trend-card">
+                <div class="trend-icon"><i class="fas fa-code"></i></div>
+                <h3>Next-Gen Languages</h3>
+                <span class="trend-badge badge-growth">High Growth</span>
+                <div class="trend-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">+189%</div>
+                        <div class="stat-label">Rust Adoption</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">+156%</div>
+                        <div class="stat-label">Kotlin Growth</div>
+                    </div>
+                </div>
+                <p class="trend-description">New languages are emerging to address modern challenges: memory safety, concurrency, and developer productivity. Rust, Go, and Kotlin are leading the charge.</p>
+                <div class="trend-features">
+                    <h4>Rising Stars:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> <strong>Rust:</strong> Memory safety without garbage collection</li>
+                        <li><i class="fas fa-check"></i> <strong>Zig:</strong> Modern systems programming</li>
+                        <li><i class="fas fa-check"></i> <strong>Carbon:</strong> C++ successor by Google</li>
+                        <li><i class="fas fa-check"></i> <strong>Mojo:</strong> Python + performance</li>
+                    </ul>
+                </div>
+                <p><strong>Adoption Trend:</strong> Rust is being adopted by Microsoft, Google, and Amazon for systems programming.</p>
+            </div>
 
-    <!-- Expert Predictions -->
-    <section aria-label="Expert Predictions">
+            <!-- WebAssembly -->
+            <div class="trend-card">
+                <div class="trend-icon"><i class="fas fa-globe"></i></div>
+                <h3>WebAssembly (WASM)</h3>
+                <span class="trend-badge badge-emerging">Emerging</span>
+                <div class="trend-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">87%</div>
+                        <div class="stat-label">Dev Interest</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4.5x</div>
+                        <div class="stat-label">Performance Gain</div>
+                    </div>
+                </div>
+                <p class="trend-description">WebAssembly allows running high-performance code in browsers, enabling game engines, video editors, and even operating systems to run on the web.</p>
+                <div class="trend-features">
+                    <h4>Use Cases:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> High-performance web apps</li>
+                        <li><i class="fas fa-check"></i> Server-side computing</li>
+                        <li><i class="fas fa-check"></i> Plugin systems</li>
+                        <li><i class="fas fa-check"></i> Cross-platform development</li>
+                    </ul>
+                </div>
+                <p><strong>Supported Languages:</strong> C/C++, Rust, Go, AssemblyScript</p>
+            </div>
+
+            <!-- Quantum Computing -->
+            <div class="trend-card">
+                <div class="trend-icon"><i class="fas fa-atom"></i></div>
+                <h3>Quantum Computing</h3>
+                <span class="trend-badge badge-experimental">Experimental</span>
+                <div class="trend-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">$8B</div>
+                        <div class="stat-label">Investment 2025</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1000+</div>
+                        <div class="stat-label">Qubit Systems</div>
+                    </div>
+                </div>
+                <p class="trend-description">Quantum programming languages are emerging as quantum computers become more powerful. Qiskit, Q#, and Cirq are leading the way.</p>
+                <div class="trend-features">
+                    <h4>Quantum Languages:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Qiskit (IBM) - Python-based</li>
+                        <li><i class="fas fa-check"></i> Q# (Microsoft)</li>
+                        <li><i class="fas fa-check"></i> Cirq (Google)</li>
+                        <li><i class="fas fa-check"></i> Ocean (D-Wave)</li>
+                    </ul>
+                </div>
+                <p><strong>Applications:</strong> Cryptography, drug discovery, optimization</p>
+            </div>
+
+            <!-- Edge Computing -->
+            <div class="trend-card">
+                <div class="trend-icon"><i class="fas fa-edge"></i></div>
+                <h3>Edge Computing</h3>
+                <span class="trend-badge badge-growth">High Growth</span>
+                <div class="trend-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">75%</div>
+                        <div class="stat-label">Data at Edge by 2025</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">5ms</div>
+                        <div class="stat-label">Latency Target</div>
+                    </div>
+                </div>
+                <p class="trend-description">Processing moves from cloud to edge devices. Languages need to be lightweight and efficient for IoT, mobile, and embedded systems.</p>
+                <div class="trend-features">
+                    <h4>Edge Languages:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Rust - Memory safe, no runtime</li>
+                        <li><i class="fas fa-check"></i> Go - Efficient concurrency</li>
+                        <li><i class="fas fa-check"></i> C++ - Maximum performance</li>
+                        <li><i class="fas fa-check"></i> MicroPython - Python on microcontrollers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Low-Code/No-Code -->
+            <div class="trend-card">
+                <div class="trend-icon"><i class="fas fa-mouse-pointer"></i></div>
+                <h3>Low-Code/No-Code</h3>
+                <span class="trend-badge badge-mainstream">Mainstream</span>
+                <div class="trend-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">65%</div>
+                        <div class="stat-label">App Development</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4x</div>
+                        <div class="stat-label">Faster Delivery</div>
+                    </div>
+                </div>
+                <p class="trend-description">Platforms enabling non-developers to build applications. This democratizes development but also creates new integration challenges for traditional programmers.</p>
+                <div class="trend-features">
+                    <h4>Popular Platforms:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Microsoft Power Apps</li>
+                        <li><i class="fas fa-check"></i> OutSystems</li>
+                        <li><i class="fas fa-check"></i> Mendix</li>
+                        <li><i class="fas fa-check"></i> Bubble</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Timeline -->
+        <div class="future-timeline">
+            <h2><i class="fas fa-calendar-alt"></i> Technology Adoption Timeline</h2>
+            <div class="timeline-container">
+                <div class="timeline-node">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-title">AI Code Generation</div>
+                    <div>50% of code AI-assisted</div>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-year">2027</div>
+                    <div class="timeline-title">WASM Everywhere</div>
+                    <div>Universal runtime</div>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-year">2030</div>
+                    <div class="timeline-title">Quantum Advantage</div>
+                    <div>Practical quantum apps</div>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-year">2035+</div>
+                    <div class="timeline-title">AGI Integration</div>
+                    <div>Human-level programming</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expert Predictions -->
         <h2><i class="fas fa-microphone"></i> Expert Predictions</h2>
         <div class="predictions-grid">
-            <!-- prediction cards here (unchanged) -->
+            <div class="prediction-card">
+                <div class="prediction-year">2030</div>
+                <h3>Rust becomes #2</h3>
+                <p>Rust will become the second most loved language and enter top 5 in TIOBE index due to systems programming demand.</p>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 85%;"></div>
+                </div>
+                <small>85% confidence</small>
+            </div>
+            <div class="prediction-card">
+                <div class="prediction-year">2028</div>
+                <h3>Python's AI Dominance</h3>
+                <p>Python maintains #1 position but faces competition from Mojo and Julia for performance-critical AI.</p>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 92%;"></div>
+                </div>
+                <small>92% confidence</small>
+            </div>
+            <div class="prediction-card">
+                <div class="prediction-year">2029</div>
+                <h3>JavaScript Evolution</h3>
+                <p>TypeScript becomes the standard, and WebAssembly starts replacing JavaScript for performance-critical web apps.</p>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 78%;"></div>
+                </div>
+                <small>78% confidence</small>
+            </div>
+            <div class="prediction-card">
+                <div class="prediction-year">2032</div>
+                <h3>Quantum Languages</h3>
+                <p>First mainstream quantum programming language emerges as quantum computers reach 10,000+ qubits.</p>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 65%;"></div>
+                </div>
+                <small>65% confidence</small>
+            </div>
         </div>
-    </section>
 
-    <!-- Figure with Figcaption -->
-    <section aria-label="Future Technology Figure">
+        <!-- Figure with Figcaption -->
         <figure class="future-figure">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                 alt="Future technology concept"
-                 onerror="this.src='https://via.placeholder.com/800x400?text=Future+of+Programming'">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Future technology concept" onerror="this.src='https://via.placeholder.com/800x400?text=Future+of+Programming'">
             <figcaption>
                 <i class="fas fa-eye"></i> Figure 1: The future of programming will blend AI, quantum computing, and human creativity
             </figcaption>
         </figure>
-    </section>
 
-    <!-- Expert Quotes Section -->
-    <section aria-label="Industry Voices">
+        <!-- Expert Quotes Section -->
         <h2><i class="fas fa-quote-right"></i> Industry Voices</h2>
         <div class="expert-quotes">
-            <!-- quote cards here (unchanged) -->
+            <div class="quote-card">
+                <div class="quote-text">In 10 years, we'll look back at today's programming and wonder how we were so productive without AI assistance.</div>
+                <div class="quote-author">Satya Nadella</div>
+                <div class="quote-title">CEO, Microsoft</div>
+            </div>
+            <div class="quote-card">
+                <div class="quote-text">Rust will become as fundamental as C is today for systems programming. Memory safety is no longer optional.</div>
+                <div class="quote-author">Anders Hejlsberg</div>
+                <div class="quote-title">Creator of C#, TypeScript</div>
+            </div>
+            <div class="quote-card">
+                <div class="quote-text">The next big language won't be created by a company, but will emerge from the open-source community solving real problems.</div>
+                <div class="quote-author">Linus Torvalds</div>
+                <div class="quote-title">Creator of Linux, Git</div>
+            </div>
         </div>
-    </section>
 
-    <!-- Details/Summary with Additional Trends -->
-    <section aria-label="Additional Trends">
-        <h2><i class="fas fa-lightbulb"></i> Additional Trends</h2>
+        <!-- Details/Summary with Additional Trends -->
         <details>
-            <summary>5 More Trends to Watch</summary>
+            <summary><i class="fas fa-lightbulb"></i> 5 More Trends to Watch</summary>
             <p>
                 <strong>1. Green Computing:</strong> Energy-efficient programming becomes critical as data centers consume 3% of global electricity.<br>
                 <strong>2. Self-Healing Code:</strong> AI systems that automatically detect and fix bugs in production.<br>
@@ -468,50 +794,46 @@
                 <em>These emerging fields could reshape how we think about software development in the next decade.</em>
             </p>
         </details>
-    </section>
 
-    <!-- Trend Analysis Section -->
-    <section aria-label="Trend Analysis">
-        <h2><i class="fas fa-chart-pie"></i> Trend Analysis</h2>
-        <article>
-            <h2>AI & Machine Learning Evolution</h2>
-            <p>Languages like Python and R are increasingly used for AI, data science, and machine learning applications. By 2028, we expect specialized AI hardware to drive new language features for parallel processing. Mojo, a Python superset with C-level performance, could become the standard for AI development.</p>
-            <p><strong>Market Impact:</strong> AI-related programming jobs are projected to grow 312% by 2030, with average salaries exceeding $150,000.</p>
-        </article>
+        <!-- Original articles preserved and enhanced -->
+        <section style="margin-top: 3rem;">
+            <h2><i class="fas fa-chart-pie"></i> Trend Analysis</h2>
+            <article>
+                <h3>AI & Machine Learning Evolution</h3>
+                <p>Languages like Python and R are increasingly used for AI, data science, and machine learning applications. By 2028, we expect specialized AI hardware to drive new language features for parallel processing. Mojo, a Python superset with C-level performance, could become the standard for AI development.</p>
+                <p><strong>Market Impact:</strong> AI-related programming jobs are projected to grow 312% by 2030, with average salaries exceeding $150,000.</p>
+            </article>
+            <article>
+                <h3>The Rise of Systems Programming Languages</h3>
+                <p>Languages like Rust and Kotlin are growing in popularity for system programming and mobile development. Rust's ownership model eliminates entire classes of bugs, making it ideal for critical infrastructure. Kotlin has become the preferred language for Android development, with 60% of top Android apps now using it.</p>
+                <p><strong>Adoption Metrics:</strong> Rust has been voted "most loved language" in Stack Overflow surveys for 8 consecutive years (2016-2024).</p>
+            </article>
+        </section>
 
-        <article>
-            <h2>The Rise of Systems Programming Languages</h2>
-            <p>Languages like Rust and Kotlin are growing in popularity for system programming and mobile development. Rust's ownership model eliminates entire classes of bugs, making it ideal for critical infrastructure. Kotlin has become the preferred language for Android development, with 60% of top Android apps now using it.</p>
-            <p><strong>Adoption Metrics:</strong> Rust has been voted "most loved language" in Stack Overflow surveys for 8 consecutive years (2016-2024).</p>
-        </article>
-    </section>
-
-    <!-- Call to Action -->
-    <section aria-label="Call to Action">
-        <h2><i class="fas fa-graduation-cap"></i> Stay Ahead of the Curve</h2>
-        <p style="font-size: 1.2rem; margin: 1rem 0;">Which future trend interests you most? Start learning today.</p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <button class="learn-more-btn" style="background: var(--future-primary); color: white; border: none; padding: 1rem 2rem; border-radius: 30px; cursor: pointer;" onclick="alert('AI/ML learning resources would open here')">
-                <i class="fas fa-brain"></i> Explore AI/ML
-            </button>
-            <button class="learn-more-btn" style="background: var(--future-dark); color: white; border: none; padding: 1rem 2rem; border-radius: 30px; cursor: pointer;" onclick="alert('Rust learning resources would open here')">
-                <i class="fab fa-rust"></i> Learn Rust
-            </button>
-            <button class="learn-more-btn" style="background: var(--future-accent); color: white; border: none; padding: 1rem 2rem; border-radius: 30px; cursor: pointer;" onclick="alert('Quantum computing resources would open here')">
-                <i class="fas fa-atom"></i> Quantum Computing
-            </button>
+        <!-- Call to Action -->
+        <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 30px;">
+            <h2><i class="fas fa-graduation-cap"></i> Stay Ahead of the Curve</h2>
+            <p style="font-size: 1.2rem; margin: 1rem 0;">Which future trend interests you most? Start learning today.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="learn-more-btn" style="background: var(--future-primary); color: white;" onclick="alert('AI/ML learning resources would open here')">
+                    <i class="fas fa-brain"></i> Explore AI/ML
+                </button>
+                <button class="learn-more-btn" style="background: var(--future-dark); color: white;" onclick="alert('Rust learning resources would open here')">
+                    <i class="fab fa-rust"></i> Learn Rust
+                </button>
+                <button class="learn-more-btn" style="background: var(--future-accent); color: white;" onclick="alert('Quantum computing resources would open here')">
+                    <i class="fas fa-atom"></i> Quantum Computing
+                </button>
+            </div>
         </div>
-    </section>
+    </main>
 
-</main>
-
-<footer>
-    <div class="footer-content">
-        <img src="img/csumb.png" alt="CSUMB Logo" onerror="this.style.display='none'">
-        <span><i class="fas fa-university"></i> CSUMB • CST336 • Will Walter • 2026</span>
-        <span style="font-size: 0.9rem;"><i class="fas fa-rocket"></i> Looking ahead to the future of programming</span>
-    </div>
-</footer>
-
+    <footer>
+        <div class="footer-content">
+            <img src="img/csumb.png" alt="CSUMB Logo" onerror="this.style.display='none'">
+            <span><i class="fas fa-university"></i> CSUMB • CST336 • Will Walter • 2026</span>
+            <span style="font-size: 0.9rem;"><i class="fas fa-rocket"></i> Looking ahead to the future of programming</span>
+        </div>
+    </footer>
 </body>
 </html>
