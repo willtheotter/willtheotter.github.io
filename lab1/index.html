@@ -1,519 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CST336 Lab 1 · Will's Space</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Willis Walter · CSUMB Lab 1</title>
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            line-height: 1.6;
+            background: #f0f4f8;
+            color: #0a1929;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-<style>
+        .navbar {
+            background: #0b2b44;
+            padding: 1rem 2rem;
+            box-shadow: 0 6px 12px rgba(0,20,30,0.2);
+        }
 
-/* reset */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        .nav-links a {
+            color: #e0f0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.3rem;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            background-color: transparent;
+        }
 
-body{
-font-family:'Segoe UI',system-ui,sans-serif;
-background:#f4f8fb;
-color:#0a1929;
-line-height:1.6;
-min-height:100vh;
-display:flex;
-flex-direction:column;
-}
+        .nav-links a:hover {
+            background-color: #1e4e6f;
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,180,255,0.3);
+        }
 
-/* NAVBAR */
+        .nav-links a.active {
+            background-color: #1e6b8f;
+            color: white;
+            border-bottom: 4px solid #fedb5f;
+            border-radius: 40px 40px 12px 12px;
+        }
 
-.navbar{
-position:sticky;
-top:0;
-background:#0b2b44;
-padding:1rem 2rem;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
-z-index:100;
-}
+        .wrapper {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.5rem 2rem;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 30px -10px rgba(0,40,60,0.2);
+            flex: 1;
+        }
 
-.nav-links{
-display:flex;
-justify-content:center;
-gap:3rem;
-list-style:none;
-flex-wrap:wrap;
-}
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #0c3b55;
+            border-left: 8px solid #3083a8;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
 
-.nav-links a{
-color:#e0f0ff;
-text-decoration:none;
-font-size:1.2rem;
-font-weight:600;
-padding:0.5rem 1.2rem;
-border-radius:40px;
-transition:0.25s;
-}
+        .home-flex {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+        }
 
-.nav-links a:hover{
-background:#1e4e6f;
-transform:scale(1.05);
-}
+        .home-flex img {
+            width: 240px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid #3083a8;
+            box-shadow: 0 10px 20px #b3d9f0;
+        }
 
-.nav-links a.active{
-background:#1e6b8f;
-border-bottom:4px solid #fedb5f;
-}
+        .home-text {
+            flex: 1;
+            min-width: 260px;
+        }
 
-/* MAIN */
+        .home-text p {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
 
-.wrapper{
-max-width:1100px;
-margin:2rem auto;
-background:white;
-padding:2rem;
-border-radius:28px;
-box-shadow:0 15px 25px rgba(0,0,0,0.1);
-flex:1;
-}
+        .highlight {
+            background: #e4f0fa;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+        }
 
-/* page fade animation */
+        .about-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0 2.5rem;
+            font-size: 1.2rem;
+        }
 
-.page{
-animation:fade 0.4s ease;
-}
+        .about-table th {
+            background: #134b66;
+            color: white;
+            padding: 12px 10px;
+            font-weight: 600;
+        }
 
-@keyframes fade{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;transform:translateY(0);}
-}
+        .about-table td, .about-table th {
+            border: 2px solid #b9d8ed;
+            padding: 12px 15px;
+        }
 
-h1{
-font-size:2.6rem;
-color:#0c3b55;
-border-left:8px solid #3083a8;
-padding-left:1rem;
-margin-bottom:1.5rem;
-}
+        .about-table tr:nth-child(even) {
+            background-color: #f0f8ff;
+        }
 
-/* HOME FLEX */
+        .fun-list {
+            background: #e2eff8;
+            border-radius: 24px;
+            padding: 2rem 3rem;
+            margin: 2rem 0;
+            list-style-type: square;
+        }
 
-.home-flex{
-display:flex;
-gap:2rem;
-flex-wrap:wrap;
-align-items:center;
-margin:2rem 0;
-}
+        .fun-list li {
+            font-size: 1.3rem;
+            margin: 0.8rem 0;
+            border-bottom: 1px dashed #3b7b9c;
+            padding-bottom: 0.3rem;
+        }
 
-.home-flex img{
-width:220px;
-height:220px;
-border-radius:50%;
-border:6px solid #3083a8;
-object-fit:cover;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
-}
+        .contact-card {
+            background: #ecf5fb;
+            border-radius: 40px;
+            padding: 2rem 2.5rem;
+            margin: 2rem 0;
+        }
 
-.home-text{
-flex:1;
-min-width:250px;
-}
+        .google-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: white;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: #1a4e6b;
+            border: 2px solid #a3cfec;
+        }
 
-.home-text p{
-font-size:1.2rem;
-margin-bottom:0.8rem;
-}
+        .google-badge span {
+            font-size: 2rem;
+        }
 
-.highlight{
-background:linear-gradient(90deg,#d7ecfa,#e7f4ff);
-padding:0.3rem 1rem;
-border-radius:40px;
-font-weight:600;
-}
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
 
-/* CURRENT INTERESTS */
+        .form-group label {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.3rem;
+            color: #0e3f58;
+        }
 
-.interests{
-margin-top:2rem;
-background:#e3f0fa;
-padding:1.5rem;
-border-radius:20px;
-}
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 3px solid white;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            background: white;
+            transition: 0.15s;
+            outline: none;
+        }
 
-.interests ul{
-display:flex;
-flex-wrap:wrap;
-gap:1.5rem;
-list-style:none;
-margin-top:1rem;
-}
+        .form-control:focus {
+            border-color: #137aac;
+            box-shadow: 0 0 0 4px rgba(25,145,210,0.2);
+        }
 
-.interests li{
-font-size:1.1rem;
-}
+        textarea.form-control {
+            border-radius: 30px;
+            resize: vertical;
+        }
 
-/* TABLE */
+        .btn-google {
+            background: #1e6b8f;
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #0a3347;
+            transition: 0.1s ease;
+            width: 100%;
+            letter-spacing: 1px;
+        }
 
-.about-table{
-width:100%;
-border-collapse:collapse;
-margin:2rem 0;
-}
+        .btn-google:hover {
+            background: #2482ad;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #0a3347;
+        }
 
-.about-table th{
-background:#134b66;
-color:white;
-padding:12px;
-}
+        .btn-google:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #0a3347;
+        }
 
-.about-table td{
-border:2px solid #c4dcec;
-padding:12px;
-}
+        .page-footer {
+            background: #0b2b44;
+            color: #bfd9f0;
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            border-top: 4px solid #fedb5f;
+            margin-top: 2rem;
+        }
 
-.about-table tr:nth-child(even){
-background:#f1f7fb;
-}
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* LIST */
+        .footer-logo img {
+            height: 42px;
+            width: auto;
+            filter: drop-shadow(0 2px 4px #a0c0e0);
+        }
 
-.fun-list{
-background:#e2eff8;
-padding:2rem;
-border-radius:20px;
-margin-top:2rem;
-list-style:square;
-}
+        .footer-text a {
+            color: #ffea9f;
+            text-decoration: none;
+            border-bottom: 1px dotted;
+        }
 
-.fun-list li{
-margin:0.8rem 0;
-font-size:1.2rem;
-}
-
-/* CONTACT */
-
-.contact-card{
-background:#ecf5fb;
-padding:2rem;
-border-radius:30px;
-}
-
-.form-group{
-margin-bottom:1.5rem;
-}
-
-label{
-display:block;
-font-weight:600;
-margin-bottom:5px;
-}
-
-input,textarea{
-width:100%;
-padding:0.8rem;
-border-radius:25px;
-border:2px solid #d0e6f5;
-font-size:1rem;
-}
-
-input:focus,textarea:focus{
-outline:none;
-border-color:#1e6b8f;
-}
-
-button{
-width:100%;
-padding:1rem;
-border:none;
-border-radius:40px;
-background:#1e6b8f;
-color:white;
-font-size:1.2rem;
-font-weight:600;
-cursor:pointer;
-transition:0.2s;
-}
-
-button:hover{
-background:#2a85b3;
-}
-
-/* FOOTER */
-
-.page-footer{
-background:#0b2b44;
-color:#bfd9f0;
-padding:1.2rem;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:1rem;
-font-size:0.9rem;
-border-top:4px solid #fedb5f;
-}
-
-.page-footer img{
-height:36px;
-}
-
-/* BACK TO TOP */
-
-#topBtn{
-position:fixed;
-bottom:30px;
-right:30px;
-background:#1e6b8f;
-color:white;
-border:none;
-border-radius:50%;
-width:50px;
-height:50px;
-font-size:20px;
-cursor:pointer;
-display:none;
-box-shadow:0 5px 10px rgba(0,0,0,0.3);
-}
-
-#topBtn:hover{
-background:#2a85b3;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-.home-flex{
-text-align:center;
-justify-content:center;
-}
-
-.nav-links{
-gap:1rem;
-}
-
-}
-
-</style>
+        @media (max-width: 680px) {
+            .home-flex { justify-content: center; text-align: center; }
+            .nav-links { gap: 1rem; }
+        }
+    </style>
 </head>
-
 <body>
-
-<nav class="navbar">
-<ul class="nav-links">
-
-<li><a href="#" class="active" id="nav-home">🏠 Home</a></li>
-<li><a href="#" id="nav-about">📋 About</a></li>
-<li><a href="#" id="nav-contact">📬 Contact</a></li>
-
-</ul>
-</nav>
-
-<main class="wrapper">
-
-<!-- HOME -->
-
-<div id="home-page" class="page">
-
-<h1>Hey, I'm Willis Walter</h1>
-
-<div class="home-flex">
-
-<img src="images/willis.jpg" alt="Willis Walter" class="profile-img">
-
-<div class="home-text">
-
-<p><span class="highlight">Computer Science Student · CSU Monterey Bay</span></p>
-
-<p>
-I'm a software developer focused on building modern web and mobile applications.
-My interests include React, Next.js, React Native, and Python/Django.
-</p>
-
-<p>
-I enjoy creating real projects like gym tracking apps, event platforms,
-and basketball communities online.
-</p>
-
-</div>
-</div>
-
-<div class="interests">
-
-<h3>Current Interests</h3>
-
-<ul>
-
-<li>🏀 Basketball & filming games</li>
-<li>⚡ React / Next.js development</li>
-<li>📱 React Native mobile apps</li>
-<li>🧠 Human-Computer Interaction</li>
-<li>🚀 building projects like GymLog & LaffyHoopz</li>
-
-</ul>
-
-</div>
-
-</div>
-
-<!-- ABOUT -->
-
-<div id="about-page" class="page" style="display:none">
-
-<h1>About Me & Skills</h1>
-
-<table class="about-table">
-
-<thead>
-<tr>
-<th>Technology</th>
-<th>Skill Level</th>
-<th>Notes</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td>HTML & CSS</td>
-<td>⚡⚡⚡⚡</td>
-<td>responsive websites</td>
-</tr>
-
-<tr>
-<td>JavaScript / React</td>
-<td>⚡⚡⚡⚡</td>
-<td>React + Next.js</td>
-</tr>
-
-<tr>
-<td>React Native</td>
-<td>⚡⚡⚡</td>
-<td>Expo mobile apps</td>
-</tr>
-
-<tr>
-<td>Java</td>
-<td>⚡⚡⚡</td>
-<td>Android & CS coursework</td>
-</tr>
-
-<tr>
-<td>Python</td>
-<td>⚡⚡⚡</td>
-<td>Django backend</td>
-</tr>
-
-</tbody>
-</table>
-
-<ul class="fun-list">
-
-<li>🎓 Computer Science Online Student at CSUMB</li>
-<li>🏀 Basketball player and videographer</li>
-<li>📱 Building apps like GymLog</li>
-<li>🌐 Interested in Human-Computer Interaction</li>
-<li>🚀 Expected Graduation: Summer 2027</li>
-
-</ul>
-
-</div>
-
-<!-- CONTACT -->
-
-<div id="contact-page" class="page" style="display:none">
-
-<h1>Contact</h1>
-
-<div class="contact-card">
-
-<form onsubmit="alert('Message sent (demo)!'); return false;">
-
-<div class="form-group">
-<label>Name</label>
-<input type="text" placeholder="Jane Smith" required>
-</div>
-
-<div class="form-group">
-<label>Email</label>
-<input type="email" placeholder="example@email.com" required>
-</div>
-
-<div class="form-group">
-<label>Message</label>
-<textarea rows="4" placeholder="Write your message..."></textarea>
-</div>
-
-<button type="submit">Send Message</button>
-
-</form>
-
-</div>
-
-</div>
-
-</main>
-
-<footer class="page-footer">
-
-<img src="images/csumb-logo.png" alt="CSUMB Logo">
-
-<span>© 2026 Willis Walter · CSUMB CST336 Lab</span>
-
-</footer>
-
-<button id="topBtn">↑</button>
-
-<script>
-
-/* navigation */
-
-const pages = [
-document.getElementById("home-page"),
-document.getElementById("about-page"),
-document.getElementById("contact-page")
-];
-
-const navs = [
-document.getElementById("nav-home"),
-document.getElementById("nav-about"),
-document.getElementById("nav-contact")
-];
-
-function showPage(i){
-
-pages.forEach((p,index)=>{
-p.style.display=index===i?"block":"none";
-});
-
-navs.forEach((n,index)=>{
-n.classList.toggle("active",index===i);
-});
-
-}
-
-navs[0].onclick=e=>{e.preventDefault();showPage(0);}
-navs[1].onclick=e=>{e.preventDefault();showPage(1);}
-navs[2].onclick=e=>{e.preventDefault();showPage(2);}
-
-/* back to top */
-
-const topBtn=document.getElementById("topBtn");
-
-window.onscroll=function(){
-
-if(document.body.scrollTop>200 || document.documentElement.scrollTop>200)
-topBtn.style.display="block";
-else
-topBtn.style.display="none";
-
-}
-
-topBtn.onclick=function(){
-window.scrollTo({top:0,behavior:"smooth"});
-}
-
-</script>
-
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#" class="active" id="nav-home">🏠 home</a></li>
+            <li><a href="#" id="nav-about">📋 about</a></li>
+            <li><a href="#" id="nav-contact">📬 contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="wrapper" id="main-content">
+        <div id="home-page">
+            <h1>🌟 hey, i'm Will</h1>
+            <div class="home-flex">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=240&h=240&fit=crop&auto=format" alt="Will portrait">
+                <div class="home-text">
+                    <p><span class="highlight">✦ cs major @ CSUMB ✦</span></p>
+                    <p>I love building for the web, exploring Monterey, and spending time with my dog.</p>
+                    <p>This is my CST336 Lab 1 – custom built with flexbox, my own photo, and lots of blue.</p>
+                </div>
+            </div>
+            <div style="margin-top: 2.5rem; background: #ddeeff; padding: 1.5rem; border-radius: 30px;">
+                <p style="font-size:1.4rem">⚡ currently into: </p>
+                <ul style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top:1rem; list-style:none;">
+                    <li>💻 web dev</li>
+                    <li>☕ cold brew</li>
+                    <li>🎵 indie rock</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="about-page" style="display: none;">
+            <h1>📌 about me</h1>
+            <table class="about-table">
+                <thead>
+                    <tr>
+                        <th>language</th>
+                        <th>level</th>
+                        <th>fun fact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HTML & CSS</td>
+                        <td>⚡⚡⚡⚡⚡</td>
+                        <td>flexbox enthusiast</td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript</td>
+                        <td>⚡⚡⚡⚡</td>
+                        <td>love DOM manipulation</td>
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>⚡⚡⚡⚡⚡</td>
+                        <td>first language</td>
+                    </tr>
+                    <tr>
+                        <td>Java</td>
+                        <td>⚡⚡⚡</td>
+                        <td>learning Android</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="fun-list">
+                <li>🎓 transfer student @ CSUMB</li>
+                <li>📚 weekend reader</li>
+                <li>🎸 play guitar</li>
+                <li>🌊 beach walks</li>
+            </ul>
+        </div>
+
+        <div id="contact-page" style="display: none;">
+            <h1>📮 contact me</h1>
+            <div class="contact-card">
+                <div class="google-badge">
+                    <span>🔷</span> Google Form style
+                </div>
+                <form onsubmit="alert('Thanks for reaching out!'); return false;">
+                    <div class="form-group">
+                        <label>full name</label>
+                        <input class="form-control" type="text" placeholder="e.g., Will Walter" required>
+                    </div>
+                    <div class="form-group">
+                        <label>email address</label>
+                        <input class="form-control" type="email" placeholder="wwalter@csumb.edu" required>
+                    </div>
+                    <div class="form-group">
+                        <label>message</label>
+                        <textarea class="form-control" rows="4" placeholder="what's up?"></textarea>
+                    </div>
+                    <button class="btn-google" type="submit">📨 submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/CSU_Monterey_Bay_seal.svg/240px-CSU_Monterey_Bay_seal.svg.png" alt="CSUMB seal">
+            <span>CSUMB · Monterey Bay</span>
+        </div>
+        <div class="footer-text">
+            © 2026 Will Walter · CST336 Lab 1
+            <a href="#">top</a>
+        </div>
+    </footer>
+
+    <script>
+        const homePage = document.getElementById('home-page');
+        const aboutPage = document.getElementById('about-page');
+        const contactPage = document.getElementById('contact-page');
+        const navHome = document.getElementById('nav-home');
+        const navAbout = document.getElementById('nav-about');
+        const navContact = document.getElementById('nav-contact');
+        const navLinks = [navHome, navAbout, navContact];
+        const pages = [homePage, aboutPage, contactPage];
+
+        function setActivePage(index) {
+            pages.forEach((page, i) => {
+                page.style.display = i === index ? 'block' : 'none';
+            });
+            navLinks.forEach((link, i) => {
+                if (i === index) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        navHome.addEventListener('click', (e) => {
+            e.preventDefault();
+            setActivePage(0);
+        });
+        navAbout.addEventListener('click', (e) => {
+            e.preventDefault();
+            setActivePage(1);
+        });
+        navContact.addEventListener('click', (e) => {
+            e.preventDefault();
+            setActivePage(2);
+        });
+
+        setActivePage(0);
+    </script>
 </body>
 </html>
