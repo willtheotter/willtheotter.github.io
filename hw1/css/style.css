@@ -600,12 +600,12 @@ footer img {
     width: auto;
     vertical-align: middle;
     margin-right: var(--space-sm);
-    filter: brightness(0) invert(0.8);
+    filter: brightness(0) invert(0.8);  /* This makes dark logo light for dark footer */
     transition: filter var(--transition-base);
 }
 
 footer img:hover {
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);  /* Gets brighter on hover */
 }
 
 .footer-content {
@@ -617,19 +617,6 @@ footer img:hover {
     max-width: 1200px;
     margin: 0 auto;
 }
-
-/* ===== UTILITY CLASSES ===== */
-.text-center { text-align: center; }
-.mt-1 { margin-top: var(--space-sm); }
-.mt-2 { margin-top: var(--space-md); }
-.mt-3 { margin-top: var(--space-lg); }
-.mb-1 { margin-bottom: var(--space-sm); }
-.mb-2 { margin-bottom: var(--space-md); }
-.mb-3 { margin-bottom: var(--space-lg); }
-.p-1 { padding: var(--space-sm); }
-.p-2 { padding: var(--space-md); }
-.p-3 { padding: var(--space-lg); }
-
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
     from {
