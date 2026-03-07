@@ -22,16 +22,18 @@
             --gradient-modern: linear-gradient(135deg, #1e4e6f 0%, #2b7a9c 100%);
         }
 
-        /* Hero section */
+        /* Hero section - FIXED HEADER */
         .history-hero {
-            background: var(--gradient-history);
+            background: linear-gradient(135deg, #1a3650 0%, #2b5f8a 100%);
             border-radius: 30px;
-            padding: 3rem;
+            padding: 3.5rem;
             margin: 2rem 0;
             color: white;
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(11, 43, 68, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .history-hero::before {
@@ -39,26 +41,47 @@
             position: absolute;
             right: -20px;
             bottom: -20px;
-            font-size: 6rem;
+            font-size: 8rem;
             opacity: 0.1;
             transform: rotate(-15deg);
             font-family: 'Space Mono', monospace;
+            color: var(--history-accent);
         }
 
-        .history-hero h2 {
+        .history-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .history-hero h1 {
             font-family: 'Space Mono', monospace;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             color: white;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .history-hero h1 i {
+            color: var(--history-accent);
+            font-size: 3rem;
+            margin-right: 0.5rem;
         }
 
         .history-hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 1rem auto 0;
             opacity: 0.95;
+            line-height: 1.6;
         }
 
         /* Intro text */
@@ -395,8 +418,8 @@
             color: var(--history-primary);
         }
 
-        /* Articles */
-        article {
+        /* Articles - FIXED HEADING HIERARCHY */
+        .milestone-article {
             background: white;
             border-radius: 24px;
             padding: 2rem;
@@ -406,18 +429,25 @@
             transition: all 0.4s ease;
         }
 
-        article:hover {
+        .milestone-article:hover {
             transform: translateX(10px);
             box-shadow: 0 20px 40px rgba(11, 43, 68, 0.15);
         }
 
-        article h2 {
+        .milestone-article h3 {
             color: var(--history-primary);
             margin-bottom: 1rem;
             font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        article p {
+        .milestone-article h3 i {
+            color: var(--history-accent);
+        }
+
+        .milestone-article p {
             color: #4a5568;
             line-height: 1.8;
         }
@@ -433,6 +463,25 @@
             font-weight: 600;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
+        }
+
+        /* Learn More Button */
+        .learn-more-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         /* Responsive */
@@ -465,8 +514,8 @@
                 font-size: 1.4rem;
             }
 
-            .history-hero h2 {
-                font-size: 1.8rem;
+            .history-hero h1 {
+                font-size: 2.2rem;
             }
 
             .language-evolution {
@@ -485,6 +534,14 @@
             
             .quote-block {
                 padding: 2rem;
+            }
+            
+            .history-hero {
+                padding: 2rem;
+            }
+            
+            .history-hero h1 {
+                font-size: 1.8rem;
             }
         }
 
@@ -531,12 +588,10 @@
     </nav>
     
     <main class="wrapper">
-        <h1><i class="fas fa-history"></i> History of Programming Languages</h1>
-
-        <!-- Hero Section -->
+        <!-- FIXED: Hero Section with proper h1 -->
         <div class="history-hero">
-            <h2>From Machine Code to AI</h2>
-            <p>Explore the 70+ year evolution of programming languages, from the first compilers to modern multi-paradigm languages that power today's digital world.</p>
+            <h1><i class="fas fa-history"></i> History of Programming Languages</h1>
+            <p>From Machine Code to AI: Explore the 70+ year evolution of programming languages, from the first compilers to modern multi-paradigm languages that power today's digital world.</p>
         </div>
 
         <!-- Enhanced Intro -->
@@ -690,7 +745,7 @@
             </div>
         </div>
 
-        <!-- Stats Section - Enhanced Cards -->
+        <!-- Stats Section -->
         <h2><i class="fas fa-chart-pie"></i> Key Facts</h2>
         <div class="stats-container">
             <div class="stat-card">
@@ -742,29 +797,29 @@
             </p>
         </details>
 
-        <!-- Enhanced Articles -->
+        <!-- FIXED: Articles with proper heading hierarchy (h3 instead of h2) -->
         <section style="margin-top: 3rem;">
             <h2><i class="fas fa-book-open"></i> Key Milestones</h2>
             
-            <article>
-                <h2><i class="fas fa-flask"></i> Early Languages (1950s-1960s)</h2>
+            <div class="milestone-article">
+                <h3><i class="fas fa-flask"></i> Early Languages (1950s-1960s)</h3>
                 <p>FORTRAN (Formula Translation) and COBOL (Common Business-Oriented Language) were revolutionary for their time. FORTRAN, developed by IBM under John Backus, made scientific computing accessible and is still used in high-performance computing today. COBOL, designed by Grace Hopper's team, brought programming to business applications and still processes 70% of business transactions. These languages, along with LISP (the second-oldest high-level language), laid the foundation for all modern programming paradigms.</p>
                 <div style="margin-top: 1rem;">
                     <span class="milestone-badge">First Compiler</span>
                     <span class="milestone-badge">Business Computing</span>
                     <span class="milestone-badge">Functional Programming</span>
                 </div>
-            </article>
+            </div>
 
-            <article>
-                <h2><i class="fas fa-microchip"></i> Modern Languages (1970s-1990s)</h2>
+            <div class="milestone-article">
+                <h3><i class="fas fa-microchip"></i> Modern Languages (1970s-1990s)</h3>
                 <p>The creation of C at Bell Labs by Dennis Ritchie revolutionized systems programming and led to the development of UNIX, which became the foundation of modern operating systems. C++ added object-oriented capabilities while maintaining C's performance. Java brought "write once, run anywhere" portability through the Java Virtual Machine (JVM). Meanwhile, Python emerged as a language emphasizing readability and simplicity, while JavaScript became the ubiquitous language of the web. These languages shaped today's software development practices and remain dominant in the industry.</p>
                 <div style="margin-top: 1rem;">
                     <span class="milestone-badge">Systems Programming</span>
                     <span class="milestone-badge">Object-Oriented</span>
                     <span class="milestone-badge">Web Development</span>
                 </div>
-            </article>
+            </div>
         </section>
 
         <!-- Call to Action -->

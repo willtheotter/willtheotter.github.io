@@ -25,7 +25,7 @@
             --typescript-color: #3178c6;
         }
 
-        /* Hero section */
+        /* Hero section - FIXED with proper h1 */
         .languages-hero {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
             border-radius: 30px;
@@ -35,6 +35,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(11, 43, 68, 0.3);
         }
 
         .languages-hero::before {
@@ -48,13 +49,15 @@
             font-family: 'Fira Code', monospace;
         }
 
-        .languages-hero h2 {
+        .languages-hero h1 {
             font-family: 'Fira Code', monospace;
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: white;
             text-transform: uppercase;
             letter-spacing: 2px;
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         .languages-hero p {
@@ -176,7 +179,9 @@
             margin: 1rem 0;
         }
 
-        .feature-list h4 {
+        /* FIXED: Changed from h4 to h3 for proper heading hierarchy */
+        .feature-list h3 {
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
             color: var(--primary-dark);
         }
@@ -214,6 +219,24 @@
         .code-snippet pre {
             margin: 0;
             white-space: pre-wrap;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         /* Popularity section */
@@ -433,7 +456,7 @@
                 flex-direction: column;
                 text-align: center;
             }
-            .languages-hero h2 {
+            .languages-hero h1 {
                 font-size: 1.8rem;
             }
             .popularity-section {
@@ -453,11 +476,9 @@
     </nav>
     
     <main class="wrapper">
-        <h1><i class="fas fa-code"></i> Popular Programming Languages</h1>
-
-        <!-- Hero Section -->
+        <!-- FIXED: Changed from h1 + h2 to single h1 in hero -->
         <div class="languages-hero">
-            <h2>The Tools of the Trade</h2>
+            <h1><i class="fas fa-code"></i> Popular Programming Languages</h1>
             <p>Discover the most widely-used programming languages in 2026, their features, use cases, and why developers love them. Based on TIOBE Index, Stack Overflow surveys, and GitHub statistics.</p>
         </div>
 
@@ -491,7 +512,8 @@
                 </div>
                 <p class="language-description">Python's simplicity and readability make it perfect for beginners, while its powerful libraries (NumPy, Pandas, TensorFlow) make it indispensable for data science and AI.</p>
                 <div class="feature-list">
-                    <h4>Key Features:</h4>
+                    <!-- FIXED: Changed from h4 to h3 for proper hierarchy (h2 → h3) -->
+                    <h3>Key Features:</h3>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Easy to learn, readable syntax</li>
                         <li><i class="fas fa-check-circle"></i> Extensive standard library</li>
@@ -507,7 +529,7 @@ print("Hello, World!")
 def greet(name):
     return f"Hello, {name}!"</pre>
                 </div>
-                <button class="learn-more-btn" onclick="alert('Python documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
+                <button class="learn-more-btn" style="background: var(--python-color);" onclick="alert('Python documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
             </div>
 
             <!-- JavaScript Card -->
@@ -537,7 +559,8 @@ def greet(name):
                 </div>
                 <p class="language-description">The language of the web! JavaScript runs in every browser and, with Node.js, on servers too. Essential for interactive websites and modern web applications.</p>
                 <div class="feature-list">
-                    <h4>Key Features:</h4>
+                    <!-- FIXED: Changed from h4 to h3 -->
+                    <h3>Key Features:</h3>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Runs in all browsers</li>
                         <li><i class="fas fa-check-circle"></i> Asynchronous programming</li>
@@ -552,7 +575,7 @@ console.log("Hello, World!");
 // Arrow function
 const greet = (name) => `Hello, ${name}!`;</pre>
                 </div>
-                <button class="learn-more-btn" onclick="alert('JavaScript documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
+                <button class="learn-more-btn" style="background: #000; color: var(--javascript-color);" onclick="alert('JavaScript documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
             </div>
 
             <!-- Java Card -->
@@ -582,7 +605,8 @@ const greet = (name) => `Hello, ${name}!`;</pre>
                 </div>
                 <p class="language-description">"Write once, run anywhere" - Java's platform independence makes it ideal for large-scale enterprise applications and Android development.</p>
                 <div class="feature-list">
-                    <h4>Key Features:</h4>
+                    <!-- FIXED: Changed from h4 to h3 -->
+                    <h3>Key Features:</h3>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Platform independent (JVM)</li>
                         <li><i class="fas fa-check-circle"></i> Strong typing</li>
@@ -598,7 +622,7 @@ public class HelloWorld {
     }
 }</pre>
                 </div>
-                <button class="learn-more-btn" onclick="alert('Java documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
+                <button class="learn-more-btn" style="background: var(--java-color);" onclick="alert('Java documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
             </div>
 
             <!-- C++ Card -->
@@ -628,7 +652,8 @@ public class HelloWorld {
                 </div>
                 <p class="language-description">For when performance matters most! C++ gives you fine control over system resources, making it perfect for game engines, operating systems, and high-frequency trading.</p>
                 <div class="feature-list">
-                    <h4>Key Features:</h4>
+                    <!-- FIXED: Changed from h4 to h3 -->
+                    <h3>Key Features:</h3>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> High performance</li>
                         <li><i class="fas fa-check-circle"></i> Memory control</li>
@@ -644,7 +669,7 @@ int main() {
     return 0;
 }</pre>
                 </div>
-                <button class="learn-more-btn" onclick="alert('C++ documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
+                <button class="learn-more-btn" style="background: var(--cpp-color);" onclick="alert('C++ documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
             </div>
 
             <!-- C# Card -->
@@ -674,7 +699,8 @@ int main() {
                 </div>
                 <p class="language-description">Microsoft's modern, type-safe language. Essential for Windows applications, game development with Unity, and enterprise web applications with .NET Core.</p>
                 <div class="feature-list">
-                    <h4>Key Features:</h4>
+                    <!-- FIXED: Changed from h4 to h3 -->
+                    <h3>Key Features:</h3>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Modern, clean syntax</li>
                         <li><i class="fas fa-check-circle"></i> Strong typing</li>
@@ -691,7 +717,7 @@ class Program {
     }
 }</pre>
                 </div>
-                <button class="learn-more-btn" onclick="alert('C# documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
+                <button class="learn-more-btn" style="background: var(--csharp-color);" onclick="alert('C# documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
             </div>
 
             <!-- Go Card -->
@@ -721,7 +747,8 @@ class Program {
                 </div>
                 <p class="language-description">Created by Google for modern, concurrent systems programming. Go combines ease of programming with efficient concurrency, making it perfect for cloud services and microservices.</p>
                 <div class="feature-list">
-                    <h4>Key Features:</h4>
+                    <!-- FIXED: Changed from h4 to h3 -->
+                    <h3>Key Features:</h3>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Built-in concurrency</li>
                         <li><i class="fas fa-check-circle"></i> Fast compilation</li>
@@ -737,7 +764,7 @@ func main() {
     fmt.Println("Hello, World!")
 }</pre>
                 </div>
-                <button class="learn-more-btn" onclick="alert('Go documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
+                <button class="learn-more-btn" style="background: var(--go-color);" onclick="alert('Go documentation would open here')"><i class="fas fa-book"></i> Learn More</button>
             </div>
         </div>
 
