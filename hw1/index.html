@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW1 – Programming Languages | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Home page specific styles */
+        :root {
+            --home-primary: #2c3e50;
+            --home-secondary: #34495e;
+            --home-accent: #3498db;
+            --home-success: #27ae60;
+            --home-warning: #f39c12;
+            --home-danger: #e74c3c;
+            --home-light: #f8f9fa;
+            --gradient-home: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        }
+
+        /* Hero section */
+        .home-hero {
+            background: var(--gradient-home);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 2rem 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-hero::before {
+            content: '</>';
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 10rem;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .home-hero h2 {
+            font-family: 'Fira Code', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .home-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        /* Intro section */
+        .intro-section {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .lead {
+            font-size: 1.3rem;
+            color: var(--home-primary);
+            margin-bottom: 2rem;
+            border-bottom: 2px dashed var(--home-accent);
+            padding-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Article styling */
+        .intro-section article {
+            background: var(--home-light);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--home-accent);
+            transition: all 0.4s ease;
+        }
+
+        .intro-section article:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.15);
+        }
+
+        .intro-section article:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-section article h2 {
+            color: var(--home-primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .intro-section article h2 i {
+            color: var(--home-accent);
+        }
+
+        .intro-section article p {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .intro-section article ul {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+            list-style: none;
+        }
+
+        .intro-section article ul li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .intro-section article ul li::before {
+            content: '✓';
+            color: var(--home-success);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Category grid */
+        .category-section {
+            margin: 3rem 0;
+        }
+
+        .category-section h2 {
+            color: var(--home-primary);
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            border-left: 8px solid var(--home-accent);
+            padding-left: 1.5rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+
+        .grid-item:nth-child(1)::before {
+            background: var(--home-danger);
+        }
+        .grid-item:nth-child(2)::before {
+            background: var(--home-success);
+        }
+        .grid-item:nth-child(3)::before {
+            background: var(--home-warning);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.2);
+        }
+
+        .grid-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-item:nth-child(1) i { color: var(--home-danger); }
+        .grid-item:nth-child(2) i { color: var(--home-success); }
+        .grid-item:nth-child(3) i { color: var(--home-warning); }
+
+        .grid-item h3 {
+            color: var(--home-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-item p {
+            color: #666;
+            font-weight: normal;
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .language-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .lang-tag {
+            background: var(--home-light);
+            color: var(--home-primary);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Figure styling */
+        .home-figure {
+            background: white;
+            padding: 2rem;
+            border-radius: 30px;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .home-figure img {
+            max-width: 100%;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .home-figure figcaption {
+            color: #666;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        .home-figure figcaption i {
+            color: var(--home-accent);
+            margin-right: 0.5rem;
+        }
+
+        /* Details styling */
+        .home-details {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .home-details summary {
+            font-weight: 600;
+            color: var(--home-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-details summary:hover {
+            color: var(--home-accent);
+        }
+
+        .home-details summary i {
+            color: var(--home-warning);
+        }
+
+        .home-details p {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+        }
+
+        /* Stats mini section */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-mini {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-mini:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.15);
+        }
+
+        .stat-mini .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--home-accent);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .stat-mini .stat-label {
+            color: var(--home-primary);
+            font-weight: 500;
+            margin-top: 0.3rem;
+        }
+
+        /* CTA Buttons */
+        .cta-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 30px;
+        }
+
+        .cta-section h2 {
+            color: var(--home-primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-btn.primary {
+            background: var(--home-accent);
+        }
+
+        .cta-btn.secondary {
+            background: var(--home-primary);
+        }
+
+        .cta-btn.tertiary {
+            background: var(--home-success);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .home-hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-section article {
+                padding: 1.5rem;
+            }
+            
+            .cta-section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro-section, .grid-item, .home-figure, .home-details {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="page2.html">History</a></li>
+            <li><a href="page3.html">Popular Languages</a></li>
+            <li><a href="page4.html">Future Trends</a></li>
+        </ul>
+    </nav>
+    
+    <main class="wrapper">
+        <h1><i class="fas fa-code"></i> Introduction to Programming Languages</h1>
+
+        <!-- Hero Section -->
+        <div class="home-hero">
+            <h2>Welcome to the World of Code</h2>
+            <p>Discover the fascinating world of programming languages - from their rich history to current trends and future possibilities.</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-mini">
+                <div class="stat-number">700+</div>
+                <div class="stat-label">Programming Languages</div>
+            </div>
+            <div class="stat-mini">
+                <div class="stat-number">1957</div>
+                <div class="stat-label">First High-Level Language</div>
+            </div>
+            <div class="stat-mini">
+                <div class="stat-number">70+</div>
+                <div class="stat-label">Years of Evolution</div>
+            </div>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="intro-section">
+            <p class="lead">
+                <i class="fas fa-quote-left" style="color: var(--home-accent); margin-right: 0.5rem;"></i>
+                Programming languages are the foundation of all software development. They allow humans to communicate instructions to computers in a structured and meaningful way, bridging the gap between human logic and machine execution.
+            </p>
+            
+            <article>
+                <h2><i class="fas fa-graduation-cap"></i> Why Learn Programming?</h2>
+                <p>Understanding programming languages improves problem-solving skills, enhances logical thinking, and opens up diverse career opportunities in software development, data science, artificial intelligence, and more. Whether you're building websites, analyzing data, or creating mobile apps, programming skills are essential in today's digital world.</p>
+                <ul style="margin-top: 1rem;">
+                    <li><i class="fas fa-check-circle" style="color: var(--home-success);"></i> High demand in job market</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--home-success);"></i> Develop critical thinking skills</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--home-success);"></i> Create innovative solutions</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--home-success);"></i> Competitive salaries</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--home-success);"></i> Work remotely worldwide</li>
+                </ul>
+            </article>
+
+            <article>
+                <h2><i class="fas fa-sitemap"></i> Categories of Languages</h2>
+                <p>Programming languages can be categorized in several ways based on their execution model, paradigm, and use cases. Understanding these categories helps you choose the right tool for your project.</p>
+                <ul style="margin-top: 0.5rem;">
+                    <li><strong>Compiled Languages:</strong> Converted directly into machine code (C, C++, Rust, Go)</li>
+                    <li><strong>Interpreted Languages:</strong> Executed line by line (Python, JavaScript, Ruby, PHP)</li>
+                    <li><strong>Scripting Languages:</strong> Often used for automation (Bash, PowerShell, Perl)</li>
+                    <li><strong>Functional Languages:</strong> Based on mathematical functions (Haskell, Scala, Elixir)</li>
+                    <li><strong>Object-Oriented Languages:</strong> Based on objects and classes (Java, C++, Python, C#)</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Language Categories Grid -->
+        <div class="category-section">
+            <h2><i class="fas fa-cubes"></i> Language Categories at a Glance</h2>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <i class="fas fa-cog"></i>
+                    <h3>Compiled Languages</h3>
+                    <p>Fast execution, direct machine code translation, ideal for system programming</p>
+                    <div class="language-tags">
+                        <span class="lang-tag">C</span>
+                        <span class="lang-tag">C++</span>
+                        <span class="lang-tag">Rust</span>
+                        <span class="lang-tag">Go</span>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-play"></i>
+                    <h3>Interpreted Languages</h3>
+                    <p>Flexible, easy to debug, great for rapid development and scripting</p>
+                    <div class="language-tags">
+                        <span class="lang-tag">Python</span>
+                        <span class="lang-tag">JavaScript</span>
+                        <span class="lang-tag">Ruby</span>
+                        <span class="lang-tag">PHP</span>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-terminal"></i>
+                    <h3>Scripting Languages</h3>
+                    <p>Automation, task management, and system administration</p>
+                    <div class="language-tags">
+                        <span class="lang-tag">Bash</span>
+                        <span class="lang-tag">PowerShell</span>
+                        <span class="lang-tag">Perl</span>
+                        <span class="lang-tag">Lua</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure with Figcaption -->
+        <figure class="home-figure">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                 alt="Programming code on screen with multiple language syntax"
+                 onerror="this.src='https://via.placeholder.com/1200x600?text=Programming+Languages'">
+            <figcaption>
+                <i class="fas fa-code-branch"></i> Figure 1: Modern programming environments support multiple languages, enabling developers to choose the best tool for each task. From web development with JavaScript to data science with Python.
+            </figcaption>
+        </figure>
+
+        <!-- Did You Know Section -->
+        <details class="home-details">
+            <summary><i class="fas fa-lightbulb"></i> Did you know? Fascinating Programming Facts</summary>
+            <p>
+                <strong>1843:</strong> Ada Lovelace wrote the first algorithm for Charles Babbage's Analytical Engine, making her the world's first programmer.<br><br>
+                <strong>1952:</strong> Grace Hopper developed the first compiler (A-0 System), revolutionizing how we write code.<br><br>
+                <strong>1995:</strong> JavaScript was created in just 10 days by Brendan Eich at Netscape.<br><br>
+                <strong>2005:</strong> Git was created by Linus Torvalds in just two weeks for Linux kernel development.<br><br>
+                <strong>2023:</strong> There are over 700 programming languages, with Python being the most popular for AI/ML development.
+            </p>
+        </details>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2><i class="fas fa-compass"></i> Start Your Exploration</h2>
+            <p>Dive deeper into the world of programming languages. Choose your path:</p>
+            <div class="cta-buttons">
+                <button class="cta-btn primary" onclick="window.location.href='page2.html'">
+                    <i class="fas fa-history"></i> Explore History
+                </button>
+                <button class="cta-btn secondary" onclick="window.location.href='page3.html'">
+                    <i class="fas fa-star"></i> Popular Languages
+                </button>
+                <button class="cta-btn tertiary" onclick="window.location.href='page4.html'">
+                    <i class="fas fa-rocket"></i> Future Trends
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <span><i class="fas fa-university"></i> CSUMB • CST336 • Will Walter • 2026</span>
+            <span style="font-size: 0.9rem;"><i class="fas fa-code"></i> Exploring the world of programming languages</span>
+        </div>
+    </footer>
+</body>
+</html>
