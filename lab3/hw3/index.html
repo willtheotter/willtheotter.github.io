@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SkyCast · Weather Dashboard (OpenWeatherMap API)</title>
+  <!-- external CSS file: styles.css (embedded for single-file delivery, but structured as external rules) -->
+  <link rel="stylesheet" href="data:text/css;charset=utf-8,/* external CSS with 10+ rules */
+:root {
+  --bg-gradient-start: #0b3b5f;
+  --bg-gradient-end: #1b4f72;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --primary-accent: #f39c12;
+  --secondary-accent: #e67e22;
+  --danger: #e74c3c;
+  --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3);
+  --text-dark: #1e2a36;
+  --text-muted: #2c3e50;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, 'Segoe UI', 'Poppins', 'Roboto', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(145deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.weather-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(2px);
+  border-radius: 2.5rem;
+  padding: 1.8rem 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f39c12, #d35400);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.3px;
+}
+
+.sub {
+  color: #2c3e50;
+  border-left: 4px solid var(--primary-accent);
+  padding-left: 0.75rem;
+  margin-bottom: 1.8rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-wrapper {
+  flex: 3;
+  min-width: 180px;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 2px solid #e0e7ed;
+  border-radius: 60px;
+  font-size: 1rem;
+  transition: 0.2s;
+  background: white;
+  outline: none;
+  font-weight: 500;
+}
+
+input:focus {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3);
+}
+
+button {
+  background: linear-gradient(95deg, var(--primary-accent), var(--secondary-accent));
+  border: none;
+  padding: 0 2rem;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  transform: scale(0.97);
+  background: linear-gradient(95deg, #e67e22, #d35400);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.error-msg {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.7rem 1rem;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 5px solid var(--danger);
+  font-weight: 500;
+}
+
+.weather-info {
+  margin-top: 1.2rem;
+  animation: fadeSlideUp 0.4s ease-out;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 2px dashed #dfe6e9;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+.city-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.temp-big {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: #fef5e7;
+  padding: 0.2rem 1rem;
+  border-radius: 60px;
+  color: #e67e22;
+}
+
+.weather-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.detail-card {
+  background: #f8fafc;
+  border-radius: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  flex: 1;
+  min-width: 110px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  border: 1px solid #ecf0f1;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #5d6e7e;
+  font-weight: 600;
+}
+
+.detail-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.weather-condition {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffffcc;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  justify-content: center;
+}
+
+.condition-icon {
+  font-size: 3rem;
+}
+
+.condition-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.extra-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #2c3e50;
+  background: #ecf0f1;
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  margin-top: 1rem;
+}
+
+.humidity, .pressure {
+  font-weight: 700;
+}
+
+footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  color: #ecf0f1;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+footer a {
+  color: #f1c40f;
+  text-decoration: none;
+}
+
+/* responsive adjustments */
+@media (max-width: 550px) {
+  .weather-card {
+    padding: 1.2rem;
+  }
+  .city-name {
+    font-size: 1.4rem;
+  }
+  .temp-big {
+    font-size: 1.5rem;
+  }
+  .detail-value {
+    font-size: 1.1rem;
+  }
+}
+"></style>
+</head>
+<body>
+<div class="main-container">
+  <div class="weather-card">
+    <h1>🌤️ SkyCast</h1>
+    <div class="sub">Real-time weather · OpenWeatherMap API</div>
+
+    <!-- Form element for user input -->
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input type="text" id="cityInput" placeholder="City name, e.g., London, Tokyo, New York" autocomplete="off" aria-label="City for weather">
+      </div>
+      <button id="getWeatherBtn">🔍 Get Weather</button>
+    </div>
+
+    <!-- Container for error messages (JS validation & API errors) -->
+    <div id="errorContainer"></div>
+
+    <!-- Dynamic weather data display area -->
+    <div id="weatherDisplay" class="weather-info"></div>
+  </div>
+  <footer>
+    🌍 Powered by OpenWeatherMap API | Real-time conditions & dynamic icons based on temperature
+  </footer>
+</div>
+
+<script>
+  // ---------- OPENWEATHERMAP API CONFIG ----------
+  // IMPORTANT: For this assignment, replace 'YOUR_API_KEY' with a valid OpenWeatherMap API key.
+  // You can get a free key at https://openweathermap.org/api (sign up, then use the "Current Weather Data" API).
+  const API_KEY = 'YOUR_API_KEY';   // <-- Replace with your actual API key before testing!
+  const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
+
+  // DOM elements
+  const cityInput = document.getElementById('cityInput');
+  const getWeatherBtn = document.getElementById('getWeatherBtn');
+  const errorContainer = document.getElementById('errorContainer');
+  const weatherDisplay = document.getElementById('weatherDisplay');
+
+  // Helper: clear previous error messages
+  function clearErrors() {
+    errorContainer.innerHTML = '';
+  }
+
+  // Helper: display custom error message
+  function displayError(message) {
+    errorContainer.innerHTML = `<div class="error-msg">⚠️ ${message}</div>`;
+    weatherDisplay.innerHTML = '';  // clear any stale weather data when error occurs
+  }
+
+  // Helper: show loading state
+  function setLoading(isLoading) {
+    if (isLoading) {
+      getWeatherBtn.textContent = '⏳ Loading...';
+      getWeatherBtn.disabled = true;
+    } else {
+      getWeatherBtn.textContent = '🔍 Get Weather';
+      getWeatherBtn.disabled = false;
+    }
+  }
+
+  // ---------- JS VALIDATION for form element (city input) ----------
+  // Validation: not empty, length between 2 and 50 characters, only letters/spaces/dashes/apostrophes (basic)
+  function validateCityInput(city) {
+    if (!city || city.trim() === '') {
+      return { valid: false, message: '❌ City name cannot be empty. Please enter a valid city.' };
+    }
+    const trimmed = city.trim();
+    if (trimmed.length < 2) {
+      return { valid: false, message: '❌ City name must be at least 2 characters long.' };
+    }
+    if (trimmed.length > 50) {
+      return { valid: false, message: '❌ City name is too long (max 50 characters).' };
+    }
+    // allow letters, spaces, hyphens, apostrophes, dots (common in city names)
+    const cityRegex = /^[a-zA-Z\s\-'\.]+$/;
+    if (!cityRegex.test(trimmed)) {
+      return { valid: false, message: '❌ Please use only letters, spaces, hyphens, or apostrophes for city name.' };
+    }
+    return { valid: true, message: '', trimmedCity: trimmed };
+  }
+
+  // ---------- Fetch weather data from OpenWeatherMap API (existing Web API) ----------
+  async function fetchWeather(city) {
+    try {
+      const url = `${BASE_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=en`;
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error(`City "${city}" not found. Please check spelling or try another city.`);
+        } else if (response.status === 401) {
+          throw new Error('Invalid API key. Please obtain a valid OpenWeatherMap API key and update the code.');
+        } else {
+          throw new Error(`API error (${response.status}). Please try again later.`);
+        }
+      }
+      
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      // Network errors or any fetch-level issues
+      throw new Error(err.message || 'Network error: Failed to fetch weather data.');
+    }
+  }
+
+  // ---------- Display weather data in user-friendly format + dynamic images based on temperature ----------
+  // Different images / icons based on temperature (and also weather condition description)
+  function getTemperatureBasedIcon(tempCelsius, weatherMain) {
+    // we return an emoji / icon string (could also be fontawesome, but we use rich emoji for simplicity)
+    // dynamic images: based on temperature thresholds & conditions
+    if (tempCelsius >= 30) {
+      return '🔥🌞';   // scorching hot
+    } else if (tempCelsius >= 20) {
+      return '☀️🌸';   // warm sunny
+    } else if (tempCelsius >= 10) {
+      return '🌤️🍂';   // mild
+    } else if (tempCelsius >= 0) {
+      return '❄️🧥';   // cold
+    } else {
+      return '⛄️🥶';   // freezing
+    }
+  }
+  
+  function getWeatherConditionIcon(weatherId, temp) {
+    // additional condition mapping, override by weather condition code
+    if (weatherId >= 200 && weatherId < 300) return '⛈️⚡';
+    if (weatherId >= 300 && weatherId < 400) return '🌧️💧';
+    if (weatherId >= 500 && weatherId < 600) return '🌧️☔';
+    if (weatherId >= 600 && weatherId < 700) return '❄️☃️';
+    if (weatherId >= 700 && weatherId < 800) return '🌫️😶‍🌫️';
+    if (weatherId === 800) return temp >= 25 ? '☀️😎' : '✨☀️';
+    if (weatherId > 800) return '☁️🌥️';
+    return '🌡️';
+  }
+
+  function renderWeatherData(data) {
+    // destructure needed fields
+    const cityName = data.name;
+    const country = data.sys?.country ? `, ${data.sys.country}` : '';
+    const temp = data.main.temp;
+    const feelsLike = data.main.feels_like;
+    const humidity = data.main.humidity;
+    const pressure = data.main.pressure;
+    const weatherDesc = data.weather[0]?.description || 'unknown';
+    const weatherId = data.weather[0]?.id || 800;
+    const windSpeed = data.wind.speed;
+    
+    // dynamic image based on temperature and condition (icon/temp combined)
+    const tempIconSet = getTemperatureBasedIcon(temp, weatherDesc);
+    const conditionIcon = getWeatherConditionIcon(weatherId, temp);
+    // combine both for rich visual feedback
+    const mainIcon = conditionIcon + ' ' + tempIconSet;
+    
+    // format temperature
+    const tempRounded = Math.round(temp);
+    const feelsRounded = Math.round(feelsLike);
+    
+    // Additional: different background style? We'll add inline card flair
+    let tempClass = '';
+    if (temp >= 30) tempClass = '🔥 heat-wave';
+    else if (temp <= 0) tempClass = '❄️ freezing';
+    
+    // create html with user-friendly layout
+    const weatherHtml = `
+      <div class="weather-header">
+        <span class="city-name">${escapeHtml(cityName)}${escapeHtml(country)}</span>
+        <span class="temp-big">${tempRounded}°C</span>
+      </div>
+      <div class="weather-condition">
+        <span class="condition-icon">${mainIcon}</span>
+        <span class="condition-text">${escapeHtml(weatherDesc)} • Feels like ${feelsRounded}°C</span>
+      </div>
+      <div class="weather-details">
+        <div class="detail-card">
+          <div class="detail-label">💧 HUMIDITY</div>
+          <div class="detail-value">${humidity}%</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">🌬️ WIND</div>
+          <div class="detail-value">${windSpeed} m/s</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">🔽 PRESSURE</div>
+          <div class="detail-value">${pressure} hPa</div>
+        </div>
+      </div>
+      <div class="extra-row">
+        <span>📊 Temperature‑based visual: ${tempRounded}°C → ${tempRounded >= 30 ? '🔥 Hot & Sunny' : (tempRounded >= 20 ? '🌸 Warm breeze' : (tempRounded >= 10 ? '🍂 Mild' : (tempRounded >= 0 ? '🧥 Chilly' : '⛄ Freezing!')))}</span>
+      </div>
+    `;
+    
+    weatherDisplay.innerHTML = weatherHtml;
+  }
+  
+  // simple XSS protection
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // ---------- Main controller: validate, fetch, display, handle errors ----------
+  async function handleWeatherRequest() {
+    // clear previous errors & weather display before new request
+    clearErrors();
+    weatherDisplay.innerHTML = '';   // clear previous data
+    
+    // 1) JS validation for form element (city input)
+    const rawCity = cityInput.value;
+    const validation = validateCityInput(rawCity);
+    if (!validation.valid) {
+      displayError(validation.message);
+      return;
+    }
+    
+    const validCity = validation.trimmedCity;
+    
+    // 2) Check API key placeholder warning (soft validation)
+    if (API_KEY === 'YOUR_API_KEY') {
+      displayError('🔑 API key not configured. Please replace "YOUR_API_KEY" with a valid OpenWeatherMap API key inside the JavaScript code (line ~80). Get free key at openweathermap.org');
+      return;
+    }
+    
+    setLoading(true);
+    
+    try {
+      // 3) fetch from existing Web API
+      const weatherData = await fetchWeather(validCity);
+      // 4) display data in user-friendly format
+      renderWeatherData(weatherData);
+    } catch (err) {
+      displayError(err.message || 'Unexpected error while fetching weather.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // ---------- Event listener: button click & also Enter key on input (additional UX) ----------
+  getWeatherBtn.addEventListener('click', handleWeatherRequest);
+  
+  // bonus: event listener for 'keypress' on input (Enter key) for better usability
+  cityInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleWeatherRequest();
+    }
+  });
+  
+  // Extra: small initial demo friendly message (not an error, just hint)
+  window.addEventListener('DOMContentLoaded', () => {
+    if (API_KEY === 'YOUR_API_KEY') {
+      displayError('⚠️ Demo mode: Please replace "YOUR_API_KEY" with your OpenWeatherMap API key (free). Enter any city to test after setup.');
+    } else {
+      // optional welcome message: not error but info style (we can show subtle)
+      errorContainer.innerHTML = `<div class="error-msg" style="background:#e8f0fe; color:#0b5e7e; border-left-color:#3498db;">🌐 Ready! Enter a city (e.g., Paris, Tokyo) and click Get Weather. Powered by OpenWeatherMap.</div>`;
+      setTimeout(() => {
+        if (errorContainer.innerHTML.includes('Ready!')) {
+          errorContainer.innerHTML = '';
+        }
+      }, 4000);
+    }
+  });
+</script>
+</body>
+</html>
