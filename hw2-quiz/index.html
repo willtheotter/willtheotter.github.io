@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Geography Quiz | Study Guide</title>
+    
+    <!-- Bootstrap CSS - for nice look and feel -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Simple custom styles - study notes included */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feedback {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .feedback.correct {
+            color: #28a745;
+        }
+        
+        .feedback.incorrect {
+            color: #dc3545;
+        }
+        
+        .mark-img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .score-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .congrats {
+            background: #d4edda;
+            color: #155724;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1 class="text-center mb-4">🇺🇸 US Geography Quiz</h1>
+        <p class="text-center text-muted mb-4">Test your knowledge of the United States!</p>
+        
+        <form id="quizForm">
+            <!-- Question 1: Text Input -->
+            <div class="question-card">
+                <h4><img id="markImg1" class="mark-img" style="display:none;"> 1. What is the capital of California?</h4>
+                <input type="text" id="q1" class="form-control" placeholder="Enter city name...">
+                <div id="q1Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 2: Dropdown -->
+            <div class="question-card">
+                <h4><img id="markImg2" class="mark-img" style="display:none;"> 2. Which state is home to the Grand Canyon?</h4>
+                <select id="q2" class="form-select">
+                    <option value="">-- Select a state --</option>
+                    <option value="California">California</option>
+                    <option value="Arizona">Arizona</option>
+                    <option value="Nevada">Nevada</option>
+                    <option value="Utah">Utah</option>
+                </select>
+                <div id="q2Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 3: Checkboxes (Multiple Correct) -->
+            <div class="question-card">
+                <h4><img id="markImg3" class="mark-img" style="display:none;"> 3. Which presidents are carved into Mount Rushmore? (Select all that apply)</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q3_1" value="Washington">
+                            <label class="form-check-label" for="q3_1">George Washington</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q3_2" value="Jefferson">
+                            <label class="form-check-label" for="q3_2">Thomas Jefferson</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q3_3" value="Roosevelt">
+                            <label class="form-check-label" for="q3_3">Theodore Roosevelt</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q3_4" value="Lincoln">
+                            <label class="form-check-label" for="q3_4">Abraham Lincoln</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="q3Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 4: Radio (Random Order) -->
+            <div class="question-card">
+                <h4><img id="markImg4" class="mark-img" style="display:none;"> 4. What is the smallest US state by land area?</h4>
+                <div id="q4Options"></div>
+                <div id="q4Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 5: Radio (Random Order) -->
+            <div class="question-card">
+                <h4><img id="markImg5" class="mark-img" style="display:none;"> 5. What is the longest river entirely within the US?</h4>
+                <div id="q5Options"></div>
+                <div id="q5Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 6: Number Input -->
+            <div class="question-card">
+                <h4><img id="markImg6" class="mark-img" style="display:none;"> 6. How many states are in the United States?</h4>
+                <input type="number" id="q6" class="form-control" min="1" max="60">
+                <div id="q6Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 7: Radio -->
+            <div class="question-card">
+                <h4><img id="markImg7" class="mark-img" style="display:none;"> 7. How many time zones are in the contiguous United States?</h4>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7_1" value="1">
+                            <label class="form-check-label" for="q7_1">1 zone</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7_2" value="2">
+                            <label class="form-check-label" for="q7_2">2 zones</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7_3" value="3">
+                            <label class="form-check-label" for="q7_3">3 zones</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7_4" value="4">
+                            <label class="form-check-label" for="q7_4">4 zones</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="q7Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 8: Checkboxes (Great Lakes) -->
+            <div class="question-card">
+                <h4><img id="markImg8" class="mark-img" style="display:none;"> 8. Which are Great Lakes? (Select all that apply)</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q8_1" value="Superior">
+                            <label class="form-check-label" for="q8_1">Lake Superior</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q8_2" value="Michigan">
+                            <label class="form-check-label" for="q8_2">Lake Michigan</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q8_3" value="Huron">
+                            <label class="form-check-label" for="q8_3">Lake Huron</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q8_4" value="Erie">
+                            <label class="form-check-label" for="q8_4">Lake Erie</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q8_5" value="Ontario">
+                            <label class="form-check-label" for="q8_5">Lake Ontario</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="q8_6" value="Champlain">
+                            <label class="form-check-label" for="q8_6">Lake Champlain</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="q8Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 9: Text Input -->
+            <div class="question-card">
+                <h4><img id="markImg9" class="mark-img" style="display:none;"> 9. Which state is known as "The Aloha State"?</h4>
+                <input type="text" id="q9" class="form-control" placeholder="Enter state name...">
+                <div id="q9Feedback" class="feedback"></div>
+            </div>
+            
+            <!-- Question 10: Dropdown -->
+            <div class="question-card">
+                <h4><img id="markImg10" class="mark-img" style="display:none;"> 10. Which is the southernmost US state?</h4>
+                <select id="q10" class="form-select">
+                    <option value="">-- Select a state --</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Texas">Texas</option>
+                    <option value="Hawaii">Hawaii</option>
+                    <option value="California">California</option>
+                </select>
+                <div id="q10Feedback" class="feedback"></div>
+            </div>
+            
+            <button type="button" id="submitBtn" class="btn btn-primary btn-lg w-100 mt-3">Submit Quiz</button>
+        </form>
+        
+        <!-- Results Section -->
+        <div id="results" style="display:none;">
+            <div class="score-card">
+                <h2>Your Score: <span id="score">0</span>/100</h2>
+                <div id="congratsMessage"></div>
+            </div>
+            <p class="text-center mt-3 text-muted" id="attemptCount"></p>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

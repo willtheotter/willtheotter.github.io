@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App | Fetch API Study Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ Weather Dashboard</h1>
+        <p class="subtitle">Get real-time weather data from OpenWeatherMap API</p>
+        
+        <!-- Form Element for user input (Requirement 1) -->
+        <div class="search-section">
+            <input type="text" id="cityInput" placeholder="Enter city name (e.g., London, Tokyo, Paris)">
+            <button id="searchBtn">Get Weather</button>
+        </div>
+        
+        <!-- Error message container -->
+        <div id="errorMessage" class="error-message"></div>
+        
+        <!-- Weather data display area -->
+        <div id="weatherResult" class="weather-result"></div>
+        
+        <footer>
+            <p>Powered by OpenWeatherMap API | CST336 - Fetch API Demo</p>
+        </footer>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

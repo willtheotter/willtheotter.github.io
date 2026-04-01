@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Study Guide</title>
+    
+    <!-- Bootstrap CSS for nice look and feel -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           CSS STUDY NOTES: 20+ CSS Rules for nice look
+           ======================================== */
+        
+        /* 1. background, 2. min-height, 3. display, 4. align-items */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* 5. border-radius, 6. box-shadow, 7. padding, 8. background */
+        .signup-card {
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 2rem;
+            background: white;
+        }
+        
+        /* 9. color, 10. margin-bottom */
+        h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 11. margin-bottom */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        /* 12. font-weight, 13. margin-bottom */
+        label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #555;
+        }
+        
+        /* 14. border-radius, 15. border, 16. padding */
+        input, select {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 0.6rem;
+        }
+        
+        /* 17. outline, 18. border-color */
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102,126,234,0.1);
+        }
+        
+        /* 19. background, 20. border, 21. padding, 22. border-radius */
+        .btn-primary {
+            background: #667eea;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        /* 23. transform */
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #5a67d8;
+        }
+        
+        /* 24. font-size, 25. margin-top */
+        small {
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+            display: block;
+        }
+        
+        /* 26. color for success */
+        .text-success {
+            color: #28a745 !important;
+        }
+        
+        /* 27. color for danger */
+        .text-danger {
+            color: #dc3545 !important;
+        }
+        
+        /* 28. background, 29. border-radius, 30. padding */
+        .readonly-field {
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="signup-card">
+                    <h2 class="text-center">📝 Create Account</h2>
+                    <p class="text-center text-muted mb-4">Sign up to get started</p>
+                    
+                    <!-- ZIP Code Section -->
+                    <div class="form-group">
+                        <label>📍 Zip Code</label>
+                        <input type="text" id="zip" class="form-control" placeholder="Enter 5-digit zip code" maxlength="5">
+                        <small id="zipError" class="text-danger"></small>
+                    </div>
+                    
+                    <!-- City (auto-populated) -->
+                    <div class="form-group">
+                        <label>🏙️ City</label>
+                        <input type="text" id="city" class="form-control readonly-field" readonly placeholder="Will auto-fill">
+                    </div>
+                    
+                    <!-- Latitude & Longitude (auto-populated) -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>🌐 Latitude</label>
+                                <input type="text" id="lat" class="form-control readonly-field" readonly placeholder="Auto-fills">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>🌐 Longitude</label>
+                                <input type="text" id="lon" class="form-control readonly-field" readonly placeholder="Auto-fills">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- State Dropdown -->
+                    <div class="form-group">
+                        <label>🗺️ State</label>
+                        <select id="state" class="form-select">
+                            <option value="">Select a state...</option>
+                        </select>
+                    </div>
+                    
+                    <!-- County Dropdown (updates based on state) -->
+                    <div class="form-group">
+                        <label>🏞️ County</label>
+                        <select id="county" class="form-select">
+                            <option value="">Select a state first</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Username with availability check -->
+                    <div class="form-group">
+                        <label>👤 Username</label>
+                        <input type="text" id="username" class="form-control" placeholder="Choose a username">
+                        <small id="userMsg"></small>
+                    </div>
+                    
+                    <!-- Password with suggestion -->
+                    <div class="form-group">
+                        <label>🔒 Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Create a password">
+                        <small id="suggested" class="text-info"></small>
+                    </div>
+                    
+                    <!-- Retype Password -->
+                    <div class="form-group">
+                        <label>✓ Retype Password</label>
+                        <input type="password" id="retype" class="form-control" placeholder="Confirm your password">
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button class="btn btn-primary w-100 mt-3" onclick="validateForm()">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

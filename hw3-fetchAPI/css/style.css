@@ -1,0 +1,227 @@
+/* ========================================
+   HW3: Weather App - External CSS (10+ rules)
+   CST336 - Study Guide
+   ======================================== */
+
+/* Rule 1: Reset margins and box sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Rule 2: Body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Rule 3: Main container */
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    padding: 2rem;
+    transition: transform 0.3s;
+}
+
+/* Rule 4: Hover effect */
+.container:hover {
+    transform: translateY(-5px);
+}
+
+/* Rule 5: Heading styles */
+h1 {
+    color: #667eea;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+}
+
+/* Rule 6: Subtitle */
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+/* Rule 7: Search section layout */
+.search-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+/* Rule 8: Input field styling */
+input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+/* Rule 9: Input focus state */
+input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Rule 10: Button styling */
+button {
+    padding: 12px 24px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Rule 11: Button hover */
+button:hover {
+    background: #5a67d8;
+    transform: scale(1.02);
+}
+
+/* Rule 12: Button active */
+button:active {
+    transform: scale(0.98);
+}
+
+/* Rule 13: Error message */
+.error-message {
+    background: #fee;
+    color: #c33;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 1rem 0;
+    display: none;
+    border-left: 4px solid #c33;
+}
+
+/* Rule 14: Weather result card */
+.weather-result {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Rule 15: Animation keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Rule 16: City name styling */
+.city-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Rule 17: Temperature display */
+.temperature {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #667eea;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+/* Rule 18: Weather details grid */
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+/* Rule 19: Individual detail card */
+.detail-card {
+    background: white;
+    padding: 0.8rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Rule 20: Detail label */
+.detail-label {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Rule 21: Detail value */
+.detail-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 0.3rem;
+}
+
+/* Rule 22: Weather description */
+.description {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 1rem;
+    text-transform: capitalize;
+}
+
+/* Rule 23: Footer */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Rule 24: Responsive design */
+@media (max-width: 500px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .search-section {
+        flex-direction: column;
+    }
+    
+    .weather-details {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .temperature {
+        font-size: 2rem;
+    }
+    
+    .city-name {
+        font-size: 1.3rem;
+    }
+}

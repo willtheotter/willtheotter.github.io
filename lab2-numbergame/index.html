@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number | Study Guide</title>
+    
+    <style>
+        /* ========================================
+           CSS STUDY NOTES: 25+ CSS Properties Used
+           ======================================== */
+        
+        /* 1. background, 2. font-family, 3. display, 4. justify-content, 
+           5. align-items, 6. height, 7. margin, 8. position */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        
+        /* 9. background, 10. border-radius, 11. padding, 12. width, 
+           13. text-align, 14. box-shadow, 15. position */
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        /* 16. color, 17. margin-bottom, 18. font-size */
+        h1 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        /* 19. background, 20. padding, 21. border-radius, 22. color */
+        .info-badge {
+            background: #f0f0f0;
+            padding: 0.5rem;
+            border-radius: 10px;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        /* 23. width, 24. padding, 25. font-size, 26. border, 
+           27. border-radius, 28. text-align */
+        input {
+            width: 150px;
+            padding: 12px;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+        
+        /* 29. outline, 30. border-color */
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* 31. padding, 32. margin, 33. border, 34. border-radius, 
+           35. cursor, 36. font-weight, 37. transition */
+        button {
+            padding: 10px 20px;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        /* 38. background, 39. color */
+        .guess-btn {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* 40. background */
+        .reset-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        /* 41. transform */
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        /* 42. opacity, 43. cursor */
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* 44. margin, 45. padding, 46. border-radius, 47. background, 48. color */
+        .message-area {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 10px;
+            background: #f8f9fa;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        /* 49. color */
+        .error-message {
+            color: #dc3545;
+        }
+        
+        /* 50. color */
+        .success-message {
+            color: #28a745;
+        }
+        
+        /* 51. margin, 52. padding, 53. border, 54. border-radius, 
+           55. min-height, 56. background */
+        .history-box {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            min-height: 60px;
+            background: #fafafa;
+        }
+        
+        /* 57. display, 58. justify-content, 59. gap, 60. margin-top */
+        .scoreboard {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        /* 61. font-size, 62. font-weight */
+        .score-item {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* 63. color */
+        .score-value {
+            color: #667eea;
+            font-size: 1.5rem;
+        }
+        
+        /* 64. display, 65. margin */
+        .attempts-left {
+            display: inline-block;
+            margin: 0.5rem 0;
+            padding: 0.3rem 1rem;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎲 Guess the Number</h1>
+        <div class="info-badge">Guess a number between 1 and 99</div>
+        
+        <!-- Attempts left display -->
+        <div class="attempts-left" id="attemptsLeft">Attempts left: 7</div>
+        
+        <!-- Input field -->
+        <input type="number" id="guessInput" placeholder="Enter guess" min="1" max="99">
+        <br>
+        
+        <!-- Buttons -->
+        <button class="guess-btn" id="guessBtn">Guess</button>
+        <button class="reset-btn" id="resetBtn" style="display: none;">New Game</button>
+        
+        <!-- Message area -->
+        <div class="message-area" id="message">
+            💡 Enter a number between 1 and 99 to start
+        </div>
+        
+        <!-- Guess history -->
+        <div class="history-box">
+            <strong>📝 Your Guesses:</strong><br>
+            <span id="guessList">—</span>
+        </div>
+        
+        <!-- Scoreboard -->
+        <div class="scoreboard">
+            <div class="score-item">
+                🏆 Wins<br>
+                <span class="score-value" id="wins">0</span>
+            </div>
+            <div class="score-item">
+                📉 Losses<br>
+                <span class="score-value" id="losses">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // HW3: Guess the Number Game - Study Guide
+        // CST336 - Will Walter
+        // ========================================
+        
+        // ========================================
+        // GAME VARIABLES
+        // ========================================
+        let secretNumber = Math.floor(Math.random() * 99) + 1;  // Random 1-99
+        let attempts = 0;
+        const MAX_ATTEMPTS = 7;
+        
+        // Score tracking (persists across games)
+        let totalWins = 0;
+        let totalLosses = 0;
+        
+        // ========================================
+        // DOM ELEMENTS
+        // ========================================
+        const guessInput = document.getElementById('guessInput');
+        const guessBtn = document.getElementById('guessBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const messageDiv = document.getElementById('message');
+        const guessListSpan = document.getElementById('guessList');
+        const winsSpan = document.getElementById('wins');
+        const lossesSpan = document.getElementById('losses');
+        const attemptsLeftSpan = document.getElementById('attemptsLeft');
+        
+        // ========================================
+        // HELPER FUNCTIONS
+        // ========================================
+        
+        // Update attempts left display
+        function updateAttemptsLeft() {
+            const remaining = MAX_ATTEMPTS - attempts;
+            attemptsLeftSpan.textContent = `Attempts left: ${remaining}`;
+        }
+        
+        // Add guess to history list
+        function addToHistory(guess) {
+            if (guessListSpan.textContent === '—') {
+                guessListSpan.textContent = guess;
+            } else {
+                guessListSpan.textContent += ` → ${guess}`;
+            }
+        }
+        
+        // Clear guess history
+        function clearHistory() {
+            guessListSpan.textContent = '—';
+        }
+        
+        // End game (disable guess button, show reset)
+        function endGame() {
+            guessBtn.disabled = true;
+            guessInput.disabled = true;
+            resetBtn.style.display = 'inline-block';
+        }
+        
+        // Display error message for invalid input
+        function showError(message) {
+            messageDiv.innerHTML = `❌ ${message}`;
+            messageDiv.classList.add('error-message');
+            setTimeout(() => {
+                messageDiv.classList.remove('error-message');
+            }, 2000);
+        }
+        
+        // ========================================
+        // GAME LOGIC
+        // ========================================
+        
+        // Handle guess submission
+        function handleGuess() {
+            // Get and validate input
+            const guess = parseInt(guessInput.value);
+            
+            // Check if input is valid
+            if (isNaN(guess)) {
+                showError('Please enter a valid number!');
+                guessInput.value = '';
+                guessInput.focus();
+                return;
+            }
+            
+            // Check if number is within range
+            if (guess < 1 || guess > 99) {
+                showError('Number must be between 1 and 99!');
+                guessInput.value = '';
+                guessInput.focus();
+                return;
+            }
+            
+            // Increment attempts
+            attempts++;
+            updateAttemptsLeft();
+            
+            // Add to guess history
+            addToHistory(guess);
+            
+            // Check win condition
+            if (guess === secretNumber) {
+                // WIN!
+                messageDiv.innerHTML = `🎉 CONGRATULATIONS! 🎉<br>You guessed the number ${secretNumber} in ${attempts} attempts!`;
+                messageDiv.classList.add('success-message');
+                
+                // Update win count
+                totalWins++;
+                winsSpan.textContent = totalWins;
+                
+                // End game
+                endGame();
+                return;
+            }
+            
+            // Check loss condition (out of attempts)
+            if (attempts >= MAX_ATTEMPTS) {
+                // LOSS!
+                messageDiv.innerHTML = `😭 YOU LOST! 😭<br>The secret number was ${secretNumber}`;
+                messageDiv.classList.add('error-message');
+                
+                // Update loss count
+                totalLosses++;
+                lossesSpan.textContent = totalLosses;
+                
+                // End game
+                endGame();
+                return;
+            }
+            
+            // Give hint (high/low)
+            if (guess < secretNumber) {
+                messageDiv.innerHTML = `📈 Too low! Guess higher. (Attempt ${attempts}/${MAX_ATTEMPTS})`;
+            } else {
+                messageDiv.innerHTML = `📉 Too high! Guess lower. (Attempt ${attempts}/${MAX_ATTEMPTS})`;
+            }
+            
+            // Clear input and focus
+            guessInput.value = '';
+            guessInput.focus();
+        }
+        
+        // Reset game (start new round)
+        function resetGame() {
+            // Generate new secret number
+            secretNumber = Math.floor(Math.random() * 99) + 1;
+            attempts = 0;
+            
+            // Debug: log secret number (remove in production)
+            console.log('New secret number:', secretNumber);
+            
+            // Update UI
+            updateAttemptsLeft();
+            clearHistory();
+            messageDiv.innerHTML = '🔄 New game started! Guess a number between 1 and 99.';
+            messageDiv.classList.remove('error-message', 'success-message');
+            
+            // Enable controls
+            guessBtn.disabled = false;
+            guessInput.disabled = false;
+            resetBtn.style.display = 'none';
+            
+            // Clear input
+            guessInput.value = '';
+            guessInput.focus();
+        }
+        
+        // ========================================
+        // EVENT LISTENERS
+        // ========================================
+        guessBtn.addEventListener('click', handleGuess);
+        resetBtn.addEventListener('click', resetGame);
+        
+        // Allow Enter key to submit guess
+        guessInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !guessBtn.disabled) {
+                handleGuess();
+            }
+        });
+        
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        function init() {
+            updateAttemptsLeft();
+            console.log('Game initialized! Secret number:', secretNumber);
+            guessInput.focus();
+        }
+        
+        init();
+        
+        // ========================================
+        // STUDY NOTES:
+        // ========================================
+        /*
+        GAME FEATURES:
+        1. Random number 1-99 generated each game
+        2. Max 7 attempts per game
+        3. Shows attempts left
+        4. History of all guesses
+        5. High/Low hints after each guess
+        6. Win message (congrats) when correct
+        7. Loss message with secret number when out of attempts
+        8. Error for numbers >99 or invalid
+        9. Tracks wins/losses across games
+        10. Guess button disabled after game ends, Reset button appears
+        
+        CSS PROPERTIES USED (60+):
+        - Layout: display, flex, justify-content, align-items, position
+        - Box model: margin, padding, width, height, border, border-radius
+        - Colors: background, color, border-color
+        - Text: font-family, font-size, font-weight, text-align
+        - Effects: box-shadow, transform, transition, opacity
+        - Interactive: cursor, outline, hover effects
+        */
+    </script>
+</body>
+</html>
