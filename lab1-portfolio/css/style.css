@@ -1,0 +1,178 @@
+/* ========================================
+   CST336 Study Guide - Shared Styles
+   ======================================== */
+
+/* RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /* Makes sizing easier: padding doesn't add to width */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #1a2a3a;
+    
+    /* FLEXBOX LAYOUT - Requirement */
+    /* This makes footer stick to bottom */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* Full viewport height */
+}
+
+/* ========================================
+   NAVIGATION - Requirement: :hover and active
+   ======================================== */
+nav {
+    background: #0a2f44;
+    padding: 1rem;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+/* :hover PSEUDO-CLASS - Requirement */
+nav a:hover {
+    background: #2c7da0;
+    transform: translateY(-2px);  /* Slight lift effect */
+}
+
+/* ACTIVE PAGE STYLING - Requirement */
+nav a.active {
+    background: #2c7da0;
+    border-bottom: 3px solid #ffcd6b;
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+.container {
+    flex: 1;  /* Pushes footer down */
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+    border-left: 5px solid #2c7da0;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    margin: 1.5rem 0 1rem;
+    color: #0a2f44;
+}
+
+/* ========================================
+   HOME PAGE - FLEXBOX Requirement
+   ======================================== */
+.home-flex {
+    display: flex;      /* Requirement: must use display:flex */
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;    /* Wraps on small screens */
+    margin-top: 1rem;
+}
+
+.home-flex img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #2c7da0;
+}
+
+.home-flex div {
+    flex: 1;  /* Takes remaining space */
+}
+
+/* ========================================
+   ABOUT PAGE - TABLE STYLES
+   ======================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+th {
+    background: #0a2f44;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;  /* Zebra striping - easier to read */
+}
+
+/* LIST STYLES */
+ul {
+    margin: 1rem 0 0 1.5rem;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+
+/* ========================================
+   CONTACT PAGE - FORM STYLES
+   ======================================== */
+.contact-iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+/* ========================================
+   FOOTER - Requirement: small font, different color
+   ======================================== */
+footer {
+    background: #0a2f44;
+    color: #b8d0e0;           /* Different from body text (#1a2a3a) */
+    text-align: center;
+    font-size: 0.8rem;        /* Smaller font - Requirement */
+    padding: 1.2rem;
+    margin-top: auto;
+}
+
+footer img {
+    height: 35px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 1rem;
+}

@@ -1,0 +1,57 @@
+<%- include('partials/header') %>
+
+<h1><i class="fas fa-terminal"></i> Programming Languages</h1>
+<p>Discover the most popular programming languages based on GitHub repository data.</p>
+
+<!-- Web API Data - Full Languages List -->
+<div class="api-data-card">
+    <h3><i class="fab fa-github"></i> Live Data from GitHub API</h3>
+    <p>Top languages from repositories with 10,000+ stars</p>
+</div>
+
+<div class="language-table-container">
+    <table class="language-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Language</th>
+                <th>Popular Repositories</th>
+                <th>Popularity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% languages.forEach((lang, index) => { %>
+                <tr>
+                    <td><strong>#<%= index + 1 %></strong></td>
+                    <td>
+                        <i class="fab fa-<%= lang.name.toLowerCase() === 'javascript' ? 'js' : 
+                                           lang.name.toLowerCase() === 'python' ? 'python' :
+                                           lang.name.toLowerCase() === 'typescript' ? 'js' : 'code' %>"></i>
+                        <%= lang.name %>
+                    </td>
+                    <td><%= lang.repos %> repositories</td>
+                    <td>
+                        <div class="mini-bar">
+                            <div class="mini-progress" style="width: <%= (lang.repos / languages[0].repos) * 100 %>%"></div>
+                        </div>
+                        <%= Math.round((lang.repos / languages[0].repos) * 100) %>%
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Node Package Data Section -->
+<div class="info-card">
+    <h3><i class="fas fa-graduation-cap"></i> Language Learning Path</h3>
+    <p><strong>📦 Node Package Tip:</strong> Here's a suggested learning order:</p>
+    <ol>
+        <li><strong>Python</strong> - Great for beginners, AI/ML</li>
+        <li><strong>JavaScript</strong> - Web development essential</li>
+        <li><strong>Java/C#</strong> - Enterprise applications</li>
+        <li><strong>Rust/Go</strong> - Systems and cloud programming</li>
+    </ol>
+</div>
+
+<%- include('partials/footer') %>

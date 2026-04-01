@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<h1><i class="fas fa-book"></i> Learning Resources</h1>
+<p>Free resources to start your programming journey.</p>
+
+<!-- Web API Data - GitHub Emojis -->
+<div class="emoji-section">
+    <h3><i class="fab fa-github"></i> GitHub Emojis (from GitHub API)</h3>
+    <p>Here are some fun emojis from GitHub's emoji API:</p>
+    <div class="emoji-grid">
+        <% emojis.forEach(([name, url]) => { %>
+            <div class="emoji-item">
+                <img src="<%= url %>" alt=":<%= name %>:" style="width: 32px; height: 32px;">
+                <span>:<%= name %>:</span>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<!-- Node Package Data - Random Fact -->
+<div class="fact-section">
+    <h3><i class="fas fa-lightbulb"></i> Random Fact from Our Node Package</h3>
+    <p class="fact"><%= randomFact.fact %></p>
+    <span class="category"><%= randomFact.category %></span>
+</div>
+
+<!-- Learning Links -->
+<div class="resources-list">
+    <h3><i class="fas fa-link"></i> Recommended Learning Platforms</h3>
+    <ul>
+        <li><i class="fab fa-free-code-camp"></i> freeCodeCamp - Free coding curriculum</li>
+        <li><i class="fab fa-github"></i> GitHub - Explore open source projects</li>
+        <li><i class="fab fa-stack-overflow"></i> Stack Overflow - Ask questions</li>
+        <li><i class="fab fa-youtube"></i> YouTube - Tutorials and courses</li>
+        <li><i class="fas fa-chalkboard-user"></i> MDN Web Docs - Web development documentation</li>
+    </ul>
+</div>
+
+<%- include('partials/footer') %>
